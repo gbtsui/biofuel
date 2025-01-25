@@ -1,6 +1,6 @@
 extends Node
 
-@export var Bullet : PackedScene = preload("res://scenes/bullets/bullet.tscn")
+@export var Bullet : PackedScene = preload("res://scenes/bullets/fireBullet.tscn")
 
 func shoot() -> void: 
 	var bullet = Bullet.instantiate()

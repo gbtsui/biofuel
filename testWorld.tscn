@@ -53,6 +53,8 @@ shape = SubResource("RectangleShape2D_0xeeq")
 
 [node name="Enemy" type="CharacterBody2D" parent="."]
 position = Vector2(500, 0)
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("4_x14bw")
 metadata/_edit_lock_ = true
 
