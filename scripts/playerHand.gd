@@ -1,11 +1,12 @@
-extends Node
+extends Node2D
 
 @export var Bullet : PackedScene = preload("res://scenes/bullets/fireBullet.tscn")
 
 func shoot() -> void: 
 	var bullet = Bullet.instantiate()
 	bullet.transform = $Marker2D.global_transform
-	owner.add_child(bullet)
+
+	get_tree().get_root().add_child(bullet)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,3 +15,4 @@ func _ready() -> void:
 func _process(delta) -> void:
 	if Input.is_action_just_pressed("mouseLeft"):
 		shoot()
+	#look_at(get_global_mouse_position())

@@ -15,7 +15,7 @@ scale = Vector2(3.08555, 3.08555)
 
 [node name="BulletArea" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 10
 
 [node name="BulletAreaCollision" type="CollisionShape2D" parent="BulletArea"]
 scale = Vector2(3.84648, 3.84648)

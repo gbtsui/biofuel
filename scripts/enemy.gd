@@ -2,6 +2,9 @@ extends CharacterBody2D
 class_name Enemy
 
 @export var hp: int = 100
+@export var baseSpeed = 400
+@export var currentSpeed = 400
+
 @export var selfEffect := EFFECT.NORMAL
 @export var effect_damage: float = 0
 var effect_timer = 0
@@ -39,14 +42,17 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if (selfEffect == EFFECT.FIRE && effect_timer < 0):
-		modulate = Color("e20000")
-		self.damage(effect_damage)
-		print("fire damage :( ", effect_duration_timer)
-	
+func _process(delta: float) -> void:	
 	if effect_timer < 0:
 		effect_timer = 1
+		match selfEffect:
+			EFFECT.NORMAL:
+				pass
+			EFFECT.FIRE:
+				modulate = Color("e20000")
+				self.damage(effect_damage)
+			EFFECT.CORROSION:
+				self.damage(effect_damage)
 	
 	if (effect_duration_timer < 0):
 		selfEffect = EFFECT.NORMAL
