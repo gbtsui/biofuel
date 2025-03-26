@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckx2dan16rucc"]
+
+[ext_resource type="PackedScene" uid="uid://cf5idud0xs6y8" path="res://scenes/items/weapons/ranged/ranged_weapon.tscn" id="1_yxuu5"]
+[ext_resource type="Texture2D" uid="uid://812qv2pm2cur" path="res://assets/sprites/weapons/test/TEST_potato_cannon.png" id="2_rgesm"]
+
+[node name="Weapon" instance=ExtResource("1_yxuu5")]
+offset = 50.0
+item_name = "Potato Cannon"
+
+[node name="ItemSprite" parent="." index="1"]
+visible = false
+rotation = 0.452967
+scale = Vector2(0.319846, 0.319846)
+texture = ExtResource("2_rgesm")
+flip_h = true
+
+[node name="WeaponSprite" parent="Pivot" index="0"]
+rotation = 0.474689
+scale = Vector2(0.325126, 0.325126)
+texture = ExtResource("2_rgesm")
+flip_h = true
+
+[node name="Marker2D" parent="Pivot" index="1"]
+position = Vector2(108, 2)

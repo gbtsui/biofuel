@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://da8om8cwloqkc"]
+
+[ext_resource type="PackedScene" uid="uid://5dfg3lg3hgu2" path="res://scenes/ui/interactable_ui.tscn" id="1_75oqs"]
+[ext_resource type="Script" path="res://scripts/free_potatoes.gd" id="2_fprin"]
+
+[node name="FreePotatoesInteractableUi" instance=ExtResource("1_75oqs")]
+script = ExtResource("2_fprin")
+
+[node name="Label" parent="." index="2"]
+text = "free potat !!!!"
+
+[node name="PotatButton" type="Button" parent="." index="3"]
+layout_mode = 0
+offset_left = 704.0
+offset_top = 464.0
+offset_right = 808.0
+offset_bottom = 495.0
+text = "gib potat pls"
+
+[node name="InventoryLabel" type="Label" parent="." index="4"]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 240.0
+offset_right = 256.0
+offset_bottom = 263.0
+
+[node name="CannonButton" type="Button" parent="." index="5"]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 528.0
+offset_right = 882.0
+offset_bottom = 559.0
+disabled = true
+text = "i bestow upon you the cannon (30 potats)"
+
+[connection signal="pressed" from="PotatButton" to="." method="_on_potat_button_pressed"]
+[connection signal="pressed" from="CannonButton" to="." method="_on_cannon_button_pressed"]

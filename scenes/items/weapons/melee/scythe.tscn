@@ -1,0 +1,128 @@
+[gd_scene load_steps=8 format=3 uid="uid://e7b0co5hygvv"]
+
+[ext_resource type="PackedScene" uid="uid://c2p2plr1c1v1c" path="res://scenes/items/weapons/melee/melee_weapon.tscn" id="1_ny55e"]
+[ext_resource type="Script" path="res://scripts/items/weapons/melee/scythe.gd" id="2_cxitw"]
+[ext_resource type="Texture2D" uid="uid://dd3gh4rlg80iv" path="res://assets/sprites/weapons/scythe.png" id="3_iv3r8"]
+
+[sub_resource type="Animation" id="Animation_luo3l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/PointyThing/Hurtbox/HurtboxCollision:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/PointyThing:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3i1c4"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/PointyThing/Hurtbox/HurtboxCollision:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -1.46957, 2.44695, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/PointyThing:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.523599, 0.523599, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dltl0"]
+_data = {
+"RESET": SubResource("Animation_luo3l"),
+"attack": SubResource("Animation_3i1c4")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bmw83"]
+size = Vector2(117.738, 87.1675)
+
+[node name="Scythe" instance=ExtResource("1_ny55e")]
+script = ExtResource("2_cxitw")
+knockback_magnitude = 300.0
+elemental_damage_type = 0
+elemental_damage = 0.0
+elemental_damage_duration = 1.0
+xp = {
+"attack_speed_xp": 0,
+"damage_xp": 0,
+"elemental_damage_duration_xp": 0,
+"elemental_damage_xp": 0,
+"knockback_magnitude_xp": 0
+}
+offset = 75.0
+item_name = "scythe"
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_dltl0")
+}
+
+[node name="Hurtbox" parent="Pivot/PointyThing" index="0"]
+collision_mask = 66
+
+[node name="HurtboxCollision" parent="Pivot/PointyThing/Hurtbox" index="0"]
+position = Vector2(103.25, -172.274)
+scale = Vector2(1.21881, -1.1535)
+shape = SubResource("RectangleShape2D_bmw83")
+disabled = true
+
+[node name="WeaponSprite" parent="Pivot/PointyThing" index="1"]
+position = Vector2(27, -48)
+texture = ExtResource("3_iv3r8")
+
+[connection signal="area_entered" from="Pivot/PointyThing/Hurtbox" to="." method="_on_tilled_dirt_detected"]

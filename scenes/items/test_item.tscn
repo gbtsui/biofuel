@@ -4,7 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://r4d6vww4n6u6" path="res://icon.svg" id="2_8h338"]
 
 [node name="Item" instance=ExtResource("1_sr6vc")]
-offset = 50.0
+item_name = "carrot"
+amount_in_stack = 15
+stackable = true
 
 [node name="ItemSprite" parent="." index="1"]
+scale = Vector2(0.499221, 0.499221)
 texture = ExtResource("2_8h338")

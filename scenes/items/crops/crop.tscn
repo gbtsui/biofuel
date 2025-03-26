@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://lyeiypn0a6kv"]
+
+[ext_resource type="PackedScene" uid="uid://dfhfi6iqprhku" path="res://scenes/items/item.tscn" id="1_36jtr"]
+[ext_resource type="Script" path="res://scripts/items/crops/crop.gd" id="2_futji"]
+[ext_resource type="Texture2D" uid="uid://cl1k6mgyo0fi4" path="res://assets/sprites/plants/TEST_potat.jpg" id="3_ek1o2"]
+
+[node name="Crop" instance=ExtResource("1_36jtr")]
+script = ExtResource("2_futji")
+xp_upgrade_values = {}
+offset = 50.0
+item_name = "default_crop"
+stackable = true
+
+[node name="ItemSprite" parent="." index="1"]
+texture = ExtResource("3_ek1o2")

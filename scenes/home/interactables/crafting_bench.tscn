@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://cunjitgu5n442"]
+
+[ext_resource type="PackedScene" uid="uid://x8s8moof24y8" path="res://scenes/home/interactables/interactable.tscn" id="1_kwglp"]
+[ext_resource type="Script" path="res://scripts/crafting_bench.gd" id="2_rn1mg"]
+[ext_resource type="Texture2D" uid="uid://cxbie5gaypcgy" path="res://assets/sprites/unsorted/crafting_bench.png" id="3_k0887"]
+[ext_resource type="Script" path="res://scripts/helper/exclusion_zone.gd" id="4_7wv58"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wxwjc"]
+size = Vector2(293, 202)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hcswg"]
+size = Vector2(451, 351)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h41ue"]
+size = Vector2(491, 417)
+
+[node name="CraftingBench" instance=ExtResource("1_kwglp")]
+script = ExtResource("2_rn1mg")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_k0887")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(1.5, 43)
+shape = SubResource("RectangleShape2D_wxwjc")
+
+[node name="PlayerDetector" parent="." index="2"]
+collision_layer = 0
+
+[node name="DetectorCollision" parent="PlayerDetector" index="0"]
+position = Vector2(-2.5, 10.5)
+shape = SubResource("RectangleShape2D_hcswg")
+
+[node name="ExclusionZone" type="Area2D" parent="." index="3"]
+script = ExtResource("4_7wv58")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExclusionZone" index="0"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_h41ue")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="4"]
+vertices = PackedVector2Array(-144, -59, -151, 142, 151, 145, 151, -67)

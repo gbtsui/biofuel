@@ -6,7 +6,6 @@
 - billhook (used for cutting woody material) - finesse, long slashing
 - swords ( messer/bauernwehr, utility knife ) - finesse, slashing
 - daggers (cross-hilt, utility knife) - finesse, stabbing
-- machete (used for harvesting sugarcane) - finesse, slashing
 - pitchfork (used to pitch loose material) - strength, stabbing
 - hammer (used to drive fenceposts) *[mechanic?]*
 
@@ -27,7 +26,11 @@ can you use raw plants as weapons? or are they just for upgrades and stuff?
 - sugarcane (speed buff) -> machete upgrade
 - tomato -> overall stats upgrade (because you can put tomato on everything)
 - szechuan peppercorn -> chemical warfare weapon
-- peppercorn -> chemical warfare weapon
+- coconut -> c a n n o n
+- lavender
+- longan
+- water chestnut (water caltrop)
+
 
 i would like to interrupt and point out that there is a concerningly high amount of chemical warfare weapons here
 
@@ -37,3 +40,5 @@ i would like to interrupt and point out that there is a concerningly high amount
 - onion - chemical warfare weapon, raw damage upgrade?
 - daikon -> hoe upgrade
 - horseradish -> chemical warfare weapon
+
+nitrogen/oxygen levels

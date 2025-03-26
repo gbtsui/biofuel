@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2p2plr1c1v1c"]
+
+[ext_resource type="PackedScene" uid="uid://d1d74jlq0w8dc" path="res://scenes/items/weapons/weapon.tscn" id="1_5pk2u"]
+[ext_resource type="Script" path="res://scripts/items/weapons/melee/melee_weapon.gd" id="2_h7aap"]
+[ext_resource type="Material" uid="uid://cku2oytny1tp1" path="res://shaders/outliner.tres" id="2_j5iwr"]
+[ext_resource type="Texture2D" uid="uid://r4d6vww4n6u6" path="res://icon.svg" id="3_ws25e"]
+
+[node name="MeleeWeapon" instance=ExtResource("1_5pk2u")]
+material = ExtResource("2_j5iwr")
+script = ExtResource("2_h7aap")
+damage = 10.0
+knockback_magnitude = 300.0
+elemental_damage_type = 0
+elemental_damage = 0.0
+elemental_damage_duration = 1.0
+xp = {
+"attack_speed_xp": 0,
+"damage_xp": 0,
+"elemental_damage_duration_xp": 0,
+"elemental_damage_xp": 0,
+"knockback_magnitude_xp": 0
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+
+[node name="Pivot" type="Node2D" parent="." index="3"]
+
+[node name="PointyThing" type="Node2D" parent="Pivot" index="0"]
+
+[node name="Hurtbox" type="Area2D" parent="Pivot/PointyThing" index="0"]
+collision_mask = 2
+
+[node name="HurtboxCollision" type="CollisionShape2D" parent="Pivot/PointyThing/Hurtbox" index="0"]
+
+[node name="WeaponSprite" type="Sprite2D" parent="Pivot/PointyThing" index="1"]
+visible = false
+texture = ExtResource("3_ws25e")
+
+[connection signal="body_entered" from="Pivot/PointyThing/Hurtbox" to="." method="_on_hurtbox_detected"]

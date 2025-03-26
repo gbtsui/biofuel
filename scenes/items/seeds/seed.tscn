@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjh68np1jmvpo"]
+
+[ext_resource type="PackedScene" uid="uid://dfhfi6iqprhku" path="res://scenes/items/item.tscn" id="1_8gdge"]
+[ext_resource type="Script" path="res://scripts/items/seeds/seed.gd" id="2_fsdeq"]
+[ext_resource type="Texture2D" uid="uid://ca2j3ii52tgn1" path="res://assets/sprites/unsorted/seed_packet.png" id="3_te0sg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4yrcg"]
+size = Vector2(121, 145)
+
+[node name="Seed" instance=ExtResource("1_8gdge")]
+script = ExtResource("2_fsdeq")
+seed_mode = 0
+deceleration = 300.0
+initial_speed = 500.0
+growth_time = 5.0
+crop_name = "default"
+yield_min = 3
+yield_max = 7
+seed_texture = null
+seed_hp = 50.0
+offset = 300.0
+stackable = true
+
+[node name="ItemSprite" parent="." index="1"]
+texture = ExtResource("3_te0sg")
+
+[node name="SeedDetector" type="CharacterBody2D" parent="." index="2"]
+collision_layer = 32
+collision_mask = 0
+
+[node name="SeedHitbox" type="CollisionShape2D" parent="SeedDetector" index="0"]
+position = Vector2(0.5, 7.5)
+shape = SubResource("RectangleShape2D_4yrcg")
+
+[node name="SeedSprite" type="Sprite2D" parent="." index="3"]

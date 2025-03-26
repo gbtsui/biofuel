@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckmvmup0ryy8p"]
+
+[ext_resource type="PackedScene" uid="uid://x8s8moof24y8" path="res://scenes/home/interactables/interactable.tscn" id="1_fmec3"]
+[ext_resource type="Script" path="res://scripts/upgrade_station.gd" id="2_mmrdj"]
+[ext_resource type="Texture2D" uid="uid://dvpp0a4x1mkmm" path="res://assets/sprites/unsorted/upgrade_station.png" id="3_41r01"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tktll"]
+size = Vector2(175, 179)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ruh1"]
+size = Vector2(372, 312.5)
+
+[node name="Interactable" instance=ExtResource("1_fmec3")]
+script = ExtResource("2_mmrdj")
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(2, 8.49997)
+texture = ExtResource("3_41r01")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(1, 90)
+shape = SubResource("RectangleShape2D_tktll")
+
+[node name="DetectorCollision" parent="PlayerDetector" index="0"]
+position = Vector2(-1, 87.25)
+shape = SubResource("RectangleShape2D_7ruh1")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="3"]
+vertices = PackedVector2Array(-89, 181, 99, 186, 98, -4, -94, -2)
+affect_navigation_mesh = true
+carve_navigation_mesh = true

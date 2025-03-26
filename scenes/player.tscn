@@ -1,47 +1,156 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1f0yvqffglf3"]
+[gd_scene load_steps=16 format=3 uid="uid://b1f0yvqffglf3"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_hyag5"]
-[ext_resource type="Texture2D" uid="uid://r4d6vww4n6u6" path="res://icon.svg" id="2_8ms7n"]
-[ext_resource type="Script" path="res://scripts/playerHand.gd" id="3_n3bfm"]
+[ext_resource type="Texture2D" uid="uid://i5yr6k4xysrb" path="res://assets/sprites/player/test_player_body.png" id="2_g2625"]
+[ext_resource type="Texture2D" uid="uid://bm1y3jsg6quo3" path="res://assets/sprites/player/test_player.png" id="2_wvq6i"]
+[ext_resource type="Texture2D" uid="uid://dj7flurcpp8tu" path="res://assets/sprites/player/test_player_head.png" id="3_nw0u7"]
 [ext_resource type="Script" path="res://scripts/inventory.gd" id="4_be1j3"]
+[ext_resource type="PackedScene" uid="uid://b6mx2wiv20qob" path="res://scenes/ui/pause_ui.tscn" id="4_gl3te"]
+[ext_resource type="PackedScene" uid="uid://rtfr3au2dhqa" path="res://scenes/ui/test_ui.tscn" id="4_t7er8"]
+[ext_resource type="PackedScene" uid="uid://jbw17663adly" path="res://scenes/ui/inventory_ui.tscn" id="6_wunx0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cx4yf"]
-radius = 61.0
+radius = 28.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ibuml"]
 radius = 151.083
 
+[sub_resource type="Animation" id="Animation_uus08"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -36)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 29)]
+}
+
+[sub_resource type="Animation" id="Animation_boq3g"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -36), Vector2(0, -33), Vector2(0, -35)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5, 0.733333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 29), Vector2(0, 31), Vector2(0, 29), Vector2(0, 31), Vector2(0, 30)]
+}
+
+[sub_resource type="Animation" id="Animation_jvg4t"]
+resource_name = "left"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1sh86"]
+_data = {
+"RESET": SubResource("Animation_uus08"),
+"idle": SubResource("Animation_boq3g"),
+"left": SubResource("Animation_jvg4t")
+}
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_qhvu5"]
+
 [node name="Player" type="CharacterBody2D"]
+visibility_layer = 8
 collision_mask = 9
 script = ExtResource("1_hyag5")
 
-[node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_8ms7n")
+[node name="UiLayer" type="CanvasLayer" parent="."]
+
+[node name="TestUi" parent="UiLayer" instance=ExtResource("4_t7er8")]
+size_flags_horizontal = 4
+
+[node name="InventoryUi" parent="UiLayer" instance=ExtResource("6_wunx0")]
+
+[node name="PauseUi" parent="UiLayer" instance=ExtResource("4_gl3te")]
+visible = false
+
+[node name="OpenDebug" type="Button" parent="UiLayer"]
+visible = false
+offset_right = 8.0
+offset_bottom = 8.0
+text = "open debug"
+
+[node name="LeftFoot" type="Sprite2D" parent="."]
+position = Vector2(-22, 84)
+texture = ExtResource("2_wvq6i")
+region_enabled = true
+region_rect = Rect2(147, 19, 30, 33)
+
+[node name="RightFoot" type="Sprite2D" parent="."]
+position = Vector2(20, 85)
+texture = ExtResource("2_wvq6i")
+region_enabled = true
+region_rect = Rect2(150, 72, 30, 33)
+
+[node name="Body" type="Sprite2D" parent="."]
+position = Vector2(0, 29)
+texture = ExtResource("2_g2625")
+
+[node name="Head" type="Sprite2D" parent="."]
+position = Vector2(0, -36)
+texture = ExtResource("3_nw0u7")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_cx4yf")
 
 [node name="Camera" type="Camera2D" parent="."]
-
-[node name="Hand" type="Node2D" parent="."]
-script = ExtResource("3_n3bfm")
-
-[node name="Sprite2D" type="Sprite2D" parent="Hand"]
-position = Vector2(122.5, 1)
-scale = Vector2(0.523438, 0.15625)
-texture = ExtResource("2_8ms7n")
-
-[node name="Marker2D" type="Marker2D" parent="Hand"]
-position = Vector2(155, 0)
+zoom = Vector2(0.3, 0.3)
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("4_be1j3")
 
 [node name="ItemPickupHitbox" type="Area2D" parent="."]
+visible = false
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemPickupHitbox"]
 shape = SubResource("CircleShape2D_ibuml")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1sh86")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../AnimationPlayer")
+tree_root = SubResource("AnimationNodeBlendSpace2D_qhvu5")
+parameters/blend_position = Vector2(0, 0)
+
+[connection signal="pressed" from="UiLayer/OpenDebug" to="." method="_on_open_debug_pressed"]
 [connection signal="body_entered" from="ItemPickupHitbox" to="." method="_on_item_detected"]
 [connection signal="body_exited" from="ItemPickupHitbox" to="." method="_on_item_undetected"]
