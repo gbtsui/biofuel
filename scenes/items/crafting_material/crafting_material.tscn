@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwkkun65f4uva"]
+
+[ext_resource type="PackedScene" uid="uid://dfhfi6iqprhku" path="res://scenes/items/item.tscn" id="1_auosc"]
+[ext_resource type="Script" path="res://scripts/items/crafting_material/crafting_material.gd" id="2_084nr"]
+
+[node name="CraftingMaterial" instance=ExtResource("1_auosc")]
+script = ExtResource("2_084nr")
+xp_upgrade_values = {}

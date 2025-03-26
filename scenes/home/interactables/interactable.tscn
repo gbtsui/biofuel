@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://x8s8moof24y8"]
+
+[ext_resource type="Script" path="res://scripts/interactable.gd" id="1_aynj0"]
+
+[node name="Interactable" type="StaticBody2D"]
+collision_layer = 8
+script = ExtResource("1_aynj0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+
+[node name="DetectorCollision" type="CollisionShape2D" parent="PlayerDetector"]
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_player_detector_body_exited"]

@@ -1,0 +1,12 @@
+{
+	"carrot": {
+		"name": "carrot",
+		"growth_time": 10,
+		"sprite_path": "res://assets/sprites/plants/carrot.png"
+	},
+	"potato": {
+		"name": "potato",
+		"growth_time": 10,
+		"sprite_path": "res://assets/sprites/plants/potato.png"
+	}
+}

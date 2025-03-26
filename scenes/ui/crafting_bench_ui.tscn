@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://c06g68gwpjmdn"]
+
+[ext_resource type="PackedScene" uid="uid://5dfg3lg3hgu2" path="res://scenes/ui/interactable_ui.tscn" id="1_3bv65"]
+[ext_resource type="Script" path="res://scripts/ui/crafting_bench_ui.gd" id="2_wsif3"]
+
+[node name="InteractableUi" node_paths=PackedStringArray("options") instance=ExtResource("1_3bv65")]
+script = ExtResource("2_wsif3")
+options = []
+
+[node name="Label" parent="." index="2"]
+text = "crafting bench, like from minecraft but not really"
+
+[node name="ContentContainer" type="HBoxContainer" parent="." index="3"]
+custom_minimum_size = Vector2(1152, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 48.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.993712, 1)
+alignment = 1
+
+[node name="InformationContainer" type="VBoxContainer" parent="ContentContainer" index="0"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="ItemNameLabel" type="Label" parent="ContentContainer/InformationContainer" index="0"]
+layout_mode = 2
+text = "Item Name"
+
+[node name="ItemStatsLabel" type="Label" parent="ContentContainer/InformationContainer" index="1"]
+layout_mode = 2
+text = "Item Stats"
+
+[node name="CraftButton" type="Button" parent="ContentContainer/InformationContainer" index="2"]
+layout_mode = 2
+text = "craft!!!"
+
+[node name="OptionsGridContainer" type="GridContainer" parent="ContentContainer" index="1"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+
+[connection signal="pressed" from="ContentContainer/InformationContainer/CraftButton" to="." method="_on_craft_button_pressed"]

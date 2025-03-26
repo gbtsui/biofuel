@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://balej8prnyffa"]
+
+[ext_resource type="PackedScene" uid="uid://d1d74jlq0w8dc" path="res://scenes/items/weapons/weapon.tscn" id="1_tbbhj"]
+[ext_resource type="Texture2D" uid="uid://ckyypvvl18nf6" path="res://assets/sprites/weapons/test/TEST_carrot_on_a_stick.png" id="2_ympyd"]
+
+[node name="Weapon" instance=ExtResource("1_tbbhj")]
+
+[node name="ItemSprite" parent="." index="1"]
+scale = Vector2(0.2309, 0.217687)
+texture = ExtResource("2_ympyd")

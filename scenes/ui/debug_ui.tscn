@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmgynbmw0k6vu"]
+
+[ext_resource type="PackedScene" uid="uid://5dfg3lg3hgu2" path="res://scenes/ui/interactable_ui.tscn" id="1_fifml"]
+[ext_resource type="Script" path="res://scripts/ui/debug_ui.gd" id="2_uc1dw"]
+[ext_resource type="Script" path="res://scenes/ui/debug/items_debugger.gd" id="3_4vggj"]
+
+[node name="DebugUi" instance=ExtResource("1_fifml")]
+script = ExtResource("2_uc1dw")
+
+[node name="TabContainer" type="TabContainer" parent="." index="1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+
+[node name="Items" type="HBoxContainer" parent="TabContainer" index="1"]
+layout_mode = 2
+script = ExtResource("3_4vggj")
+metadata/_tab_index = 0
+
+[node name="CraftingMaterialCreator" type="GridContainer" parent="TabContainer/Items" index="0"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Items/CraftingMaterialCreator" index="0"]
+layout_mode = 2
+text = "Spawn in some items!"
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="TabContainer/Items/CraftingMaterialCreator" index="1"]
+layout_mode = 2
+placeholder_text = "item_name"
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Items/CraftingMaterialCreator" index="2"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="xInput" type="LineEdit" parent="TabContainer/Items/CraftingMaterialCreator/HBoxContainer" index="0"]
+layout_mode = 2
+text = "0"
+placeholder_text = "x"
+
+[node name="yInput" type="LineEdit" parent="TabContainer/Items/CraftingMaterialCreator/HBoxContainer" index="1"]
+layout_mode = 2
+text = "0"
+placeholder_text = "y"
+
+[node name="Button" type="Button" parent="TabContainer/Items/CraftingMaterialCreator" index="3"]
+layout_mode = 2
+text = "create machines"
+
+[node name="ItemName" type="Label" parent="TabContainer/Items/CraftingMaterialCreator" index="4"]
+layout_mode = 2
+text = "Item Name printed here if successful!"
+
+[node name="Label" parent="." index="3"]
+text = "debugging, are we?"
+
+[connection signal="pressed" from="TabContainer/Items/CraftingMaterialCreator/Button" to="TabContainer/Items" method="_spawn_item"]

@@ -1,0 +1,98 @@
+[gd_scene load_steps=4 format=3 uid="uid://cogfecw22kcnq"]
+
+[ext_resource type="PackedScene" uid="uid://5dfg3lg3hgu2" path="res://scenes/ui/interactable_ui.tscn" id="1_gsogw"]
+[ext_resource type="Script" path="res://scripts/ui/upgrade_station_ui.gd" id="2_ahvhh"]
+[ext_resource type="Texture2D" uid="uid://7me2jbrht5kd" path="res://assets/sprites/stefan_vulic.jpg" id="3_vschm"]
+
+[node name="InteractableUi" instance=ExtResource("1_gsogw")]
+script = ExtResource("2_ahvhh")
+
+[node name="Label" parent="." index="2"]
+text = "upgrades!!!"
+
+[node name="ContentContainer" type="HBoxContainer" parent="." index="3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="InformationContainer" type="VBoxContainer" parent="ContentContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WeaponNameLabel" type="Label" parent="ContentContainer/InformationContainer" index="0"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="WeaponIcon" type="TextureRect" parent="ContentContainer/InformationContainer" index="1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_vschm")
+expand_mode = 1
+
+[node name="DamageLabel" type="Label" parent="ContentContainer/InformationContainer" index="2"]
+layout_mode = 2
+
+[node name="DamageProgress" type="ProgressBar" parent="ContentContainer/InformationContainer" index="3"]
+layout_mode = 2
+
+[node name="AttackSpeedLabel" type="Label" parent="ContentContainer/InformationContainer" index="4"]
+layout_mode = 2
+
+[node name="AttackSpeedProgress" type="ProgressBar" parent="ContentContainer/InformationContainer" index="5"]
+layout_mode = 2
+
+[node name="KnockbackLabel" type="Label" parent="ContentContainer/InformationContainer" index="6"]
+layout_mode = 2
+
+[node name="KnockbackProgress" type="ProgressBar" parent="ContentContainer/InformationContainer" index="7"]
+layout_mode = 2
+
+[node name="ElementalDamageLabel" type="Label" parent="ContentContainer/InformationContainer" index="8"]
+layout_mode = 2
+
+[node name="ElementalDamageProgress" type="ProgressBar" parent="ContentContainer/InformationContainer" index="9"]
+layout_mode = 2
+
+[node name="ElementalDamageDurationLabel" type="Label" parent="ContentContainer/InformationContainer" index="10"]
+layout_mode = 2
+
+[node name="ElementalDamageDurationProgress" type="ProgressBar" parent="ContentContainer/InformationContainer" index="11"]
+layout_mode = 2
+
+[node name="UpgradeButton" type="Button" parent="ContentContainer/InformationContainer" index="12"]
+layout_mode = 2
+disabled = true
+text = "upgrade!"
+
+[node name="ItemsContainer" type="VBoxContainer" parent="ContentContainer" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ContentContainer/ItemsContainer" index="0"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="WeaponsGrid" type="GridContainer" parent="ContentContainer/ItemsContainer/ScrollContainer" index="0"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 4
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="ContentContainer/ItemsContainer" index="1"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="UpgradeItemsContainer" type="GridContainer" parent="ContentContainer/ItemsContainer/ScrollContainer2" index="0"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+columns = 4
+
+[connection signal="pressed" from="ContentContainer/InformationContainer/UpgradeButton" to="." method="_on_upgrade_button_pressed"]
