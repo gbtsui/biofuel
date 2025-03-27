@@ -23,7 +23,7 @@ func update_grid():
 		child.queue_free()
 	for item in items:
 		var recipe_button = Recipe_Button.instantiate()
-		recipe_button.icon = item.item_texture
+		recipe_button.icon = item.item_sprite.texture
 		
 		if item is Weapon:
 			weapons.append(item)
@@ -56,7 +56,7 @@ func validate_xp_fields() -> bool:
 
 func update_weapon_label():
 	$ContentContainer/InformationContainer/WeaponNameLabel.text = selected_weapon.item_name
-	$ContentContainer/InformationContainer/WeaponIcon.set_texture(selected_weapon.item_texture)
+	$ContentContainer/InformationContainer/WeaponIcon.set_texture(selected_weapon.item_sprite.texture)
 	
 	$ContentContainer/InformationContainer/DamageLabel.text = str(XPModifier.get_level("damage", selected_weapon.xp["damage_xp"])) + " " + str(selected_weapon.xp["damage_xp"])
 	$ContentContainer/InformationContainer/DamageProgress.value = selected_weapon.xp["damage_xp"]

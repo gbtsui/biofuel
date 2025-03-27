@@ -69,17 +69,6 @@ scale_min = 2.0
 scale_max = 5.0
 
 [node name="MeleeWeapon" instance=ExtResource("1_se48c")]
-knockback_magnitude = 300.0
-elemental_damage_type = 0
-elemental_damage = 0.0
-elemental_damage_duration = 1.0
-xp = {
-"attack_speed_xp": 0,
-"damage_xp": 0,
-"elemental_damage_duration_xp": 0,
-"elemental_damage_xp": 0,
-"knockback_magnitude_xp": 0
-}
 offset = 25.0
 item_name = "melee weapon"
 

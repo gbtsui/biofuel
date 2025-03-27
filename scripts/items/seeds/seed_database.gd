@@ -54,7 +54,7 @@ static func append_seed_data(seed: Seed, seed_name: String):
 	
 	seed.seed_hp = seed_data.seed_hp if seed_data.has("seed_hp") else 50.0
 	
-	seed.item_texture = load(seed_data.packet_texture) if seed_data.has("packet_texture") else load("res://assets/sprites/unsorted/seed_packet.png")
+	seed.item_texture_path = seed_data.packet_texture if seed_data.has("packet_texture") else "res://assets/sprites/unsorted/seed_packet.png"
 	seed.seed_texture = load(seed_data.seed_texture) if seed_data.has("seed_texture") else load("res://assets/sprites/unsorted/seed.png")
 	
 	return seed

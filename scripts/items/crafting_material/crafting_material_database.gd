@@ -43,6 +43,6 @@ static func append_material_data(crafting_material: CraftingMaterial, material_n
 	
 	crafting_material.item_name = material_name
 	crafting_material.xp_upgrade_values = material_data.xp_upgrade_values
-	crafting_material.item_texture = load(material_data.item_texture)
+	crafting_material.item_texture_path = material_data.item_texture
 	
 	return crafting_material

@@ -11,15 +11,6 @@ const ITEM_RECIPES := {
 		},
 		"accessible":true
 	},
-	"carrot on a stick":{ #kinda like a rope dart ngl
-		"item_name":"carrot on a stick",
-		"item_path":"res://scenes/items/weapons/special/carrot_on_a_stick.tscn",
-		"item_texture":"res://assets/sprites/weapons/test/TEST_carrot_on_a_stick.png",
-		"recipe":{
-			"carrot":15
-		},
-		"accessible":true
-	},
 	"stefan":{
 		"item_name":"stefan",
 		"item_path":"res://icon.svg",

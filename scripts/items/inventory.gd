@@ -1,10 +1,13 @@
 extends Node
 
-@export var items: Array[Item] = []
-@export var stackables: Dictionary = {}
+@export var items: Array[Item] = [] : 
+	set (value):
+		_set_items(value)
+	get:
+		return items
 @export var active_item: Item
 @export var active_item_index: int
-@export var max_items: int = 3
+@export var max_items: int = 9
 
 @onready var player = get_parent()
 @onready var inventory_label: Label = get_parent().get_node("UiLayer/TestUi/Inventory")
@@ -20,7 +23,7 @@ func set_inventory_label() -> void:
 	if active_item:
 		#inventory_label.text = active_item.item_name
 		inventory_label.text = str(active_item.amount_in_stack)
-		active_item_rect.texture = active_item.item_texture
+		active_item_rect.texture = active_item.item_sprite.texture
 	else:
 		inventory_label.text = "no active item"
 	
@@ -29,7 +32,7 @@ func set_inventory_label() -> void:
 		existing_item.queue_free()
 	for item in items:
 		var item_frame: ItemFrame = Item_Frame.instantiate()
-		item_frame.texture = item.item_texture
+		item_frame.texture = item.item_sprite.texture
 		item_frame.item_quantity = item.amount_in_stack
 		if item != active_item:
 			item_frame.self_modulate = Color(0, 0, 0,)
@@ -111,15 +114,18 @@ func pickup_item(item: Item):
 	
 	set_inventory_label()
 
-#func add_stackable(stackable: String, amount: int):
-#	if stackable in stackables:
-#		stackables[stackable] += amount
-#	else:
-#		stackables[stackable] = amount
+func _set_items(value: Array[Item]):
+	items = value
 
-#func remove_stackable(stackable: String, amount: int):
-#	if stackable in stackables:
-#		stackables[stackable] -= amount
+func _input(event) -> void:
+	if event is InputEventKey:
+		if event.pressed:
+			# Map number keys 1-9 to item indices 0-8
+			if int(event.as_text_key_label()) >= 1 and int(event.as_text_key_label()) <= 9:
+				var index = int(event.as_text_key_label()) - 1
+				if items.size() > int(event.as_text_key_label()):
+					return
+				switch_item(index)
 
 func switch_item(index) -> void:
 	#if !active_item:

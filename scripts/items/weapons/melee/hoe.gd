@@ -10,8 +10,9 @@ var exclusion_zones: Array[ExclusionZone] = []
 func _ready():
 	item_name = "hoe"
 	offset = 10
-	item_texture = preload("res://assets/sprites/weapons/hoe.png")
+	item_texture_path = "res://assets/sprites/weapons/hoe.png"
 	damage = 20
+	super()
 
 func till():
 	animation_player.play("attack")

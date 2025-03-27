@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Item
 
-var mode = MODE.GROUND_ITEM
+@export var mode = MODE.GROUND_ITEM
 @export var rotatable = true
 @export var offset: float = 500
 @export var item_name: String = "default_item"
@@ -10,7 +10,8 @@ var mode = MODE.GROUND_ITEM
 @export var amount_in_stack: int = 1
 @export var stackable = false
 
-@onready var item_texture: Texture2D # = preload("res://icon.svg")
+#@onready var item_texture: Texture2D # = preload("res://icon.svg")
+@export var item_texture_path: String = ""
 
 enum MODE {
 	GROUND_ITEM,
@@ -20,11 +21,11 @@ enum MODE {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if item_sprite.texture and !item_texture:
-		item_texture = item_sprite.texture
+	if item_sprite.texture and !item_texture_path:
+		#item_texture = item_sprite.texture
 		print("ALERT: you haven't properly defined a texture for item " + item_name + "!!!")
 	else:
-		item_sprite.texture = item_texture
+		item_sprite.texture = load(item_texture_path)
 	rotation = 0
 
 func change_mode(newMode: MODE):

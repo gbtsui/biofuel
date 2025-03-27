@@ -1,9 +1,15 @@
 extends CharacterBody2D
 class_name Player
 
-@export var SPEED : float = 300.0
 @onready var inventory: Node = get_node("Inventory")
 @onready var inventory_ui: Control = get_node("UiLayer/InventoryUi")
+
+var stats: PlayerStats = null:
+	set (value):
+		stats = value
+	get:
+		return stats
+
 
 var debugOpen: bool = false
 
@@ -17,9 +23,6 @@ var detected_items: Array[Item]
 var closest_item: Item = null
 
 var closest_interactable: Interactable = null
-
-var max_hp: float = 100
-var hp: float = 100
 
 var moving: bool = false
 
@@ -52,7 +55,7 @@ func get_input() -> void:
 			moving = true
 		else:
 			moving = false
-	velocity = input_direction * SPEED
+	velocity = input_direction * stats.SPEED
 
 func open_pause_ui() -> void:
 	$UiLayer/PauseUi.visible = true
@@ -128,11 +131,11 @@ func _on_item_undetected(body: Node2D) -> void:
 	detected_items.remove_at(index)
 
 func damage(dmg: float):
-	hp -= dmg
+	stats.hp -= dmg
 	modulate = Color(1, 0, 0)
 	await get_tree().create_timer(0.1).timeout
 	modulate = Color(1,1,1)
-	if hp <= 0:
+	if stats.hp <= 0:
 		emit_signal("player_died")
 
 signal player_died

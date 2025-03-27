@@ -24,11 +24,11 @@ func add_xp(added_xp: Dictionary, multiplier: int):
 		xp[entry] += added_xp[entry] * multiplier
 
 func _ready():
-	super()
 	$Pivot/PointyThing/Hurtbox/HurtboxCollision.disabled = true
 	
-	item_texture = item_texture if item_texture else preload("res://assets/sprites/weapons/test/axe.png")
-	$ItemSprite.texture = item_texture
+	item_texture_path = item_texture_path if item_texture_path else "res://assets/sprites/weapons/test/axe.png"
+	super()
+	#$ItemSprite.texture = item_texture
 
 func _process(delta) -> void:
 	super(delta)

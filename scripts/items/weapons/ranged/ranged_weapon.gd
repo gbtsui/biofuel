@@ -7,8 +7,8 @@ class_name RangedWeapon
 
 func _ready():
 	super()
-	item_texture = preload("res://assets/sprites/weapons/test/TEST_potato_cannon.png")
-	$ItemSprite.texture = item_texture
+	item_texture_path = "res://assets/sprites/weapons/test/TEST_potato_cannon.png"
+	#$ItemSprite.texture = item_texture
 
 
 func _process(delta: float) -> void:
