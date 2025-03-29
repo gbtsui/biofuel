@@ -4,6 +4,9 @@ class_name SaveGame
 const SAVE_PATH = "user://save.tres"
 
 @export var player_stats: PlayerStats
+@export var plots: Array[TilledDirtData]
+@export var items: Array[ItemData]
+@export var inventory: Array[ItemData]
 
 func write_savegame() -> void:
 	print("Saving game...")

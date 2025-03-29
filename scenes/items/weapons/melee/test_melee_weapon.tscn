@@ -69,8 +69,6 @@ scale_min = 2.0
 scale_max = 5.0
 
 [node name="MeleeWeapon" instance=ExtResource("1_se48c")]
-offset = 25.0
-item_name = "melee weapon"
 
 [node name="ItemSprite" parent="." index="1"]
 visible = false

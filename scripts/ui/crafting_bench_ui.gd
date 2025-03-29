@@ -24,8 +24,8 @@ func validate_recipe(item_recipe: ItemRecipe) -> bool:
 		remaining_requirements[required_material] = item_recipe.recipe[required_material]
 	
 	for player_item in player.inventory.items:
-		if player_item.item_name in remaining_requirements:
-			remaining_requirements[player_item.item_name] = remaining_requirements[player_item.item_name] - player_item.amount_in_stack
+		if player_item.data.item_name in remaining_requirements:
+			remaining_requirements[player_item.data.item_name] = remaining_requirements[player_item.data.item_name] - player_item.data.amount_in_stack
 			
 			#if player_item.amount_in_stack < required_amount:
 			#	return false
@@ -50,6 +50,7 @@ func _on_craft_button_pressed() -> void:
 		#player.inventory.remove_stackable(required_material, selected_option.recipe[required_material])
 		player.inventory.subtract_item(required_material, selected_option.recipe[required_material])
 	var item_instance = load(selected_option.item_path).instantiate()
-	get_tree().get_root().add_child(item_instance)
+	item_instance.data = WeaponDatabase.get_weapon_data(selected_option.item_name) 
+	get_tree().get_root().get_node("World").add_child(item_instance)
 	player.inventory.pickup_item(item_instance)
 	_on_button_pressed()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b1f0yvqffglf3"]
+[gd_scene load_steps=17 format=3 uid="uid://b1f0yvqffglf3"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_hyag5"]
 [ext_resource type="Texture2D" uid="uid://i5yr6k4xysrb" path="res://assets/sprites/player/test_player_body.png" id="2_g2625"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b6mx2wiv20qob" path="res://scenes/ui/pause_ui.tscn" id="4_gl3te"]
 [ext_resource type="PackedScene" uid="uid://rtfr3au2dhqa" path="res://scenes/ui/test_ui.tscn" id="4_t7er8"]
 [ext_resource type="PackedScene" uid="uid://jbw17663adly" path="res://scenes/ui/inventory_ui.tscn" id="6_wunx0"]
+[ext_resource type="Texture2D" uid="uid://bxsfc5xdhwlj" path="res://assets/sprites/environment/light.png" id="9_l7bi0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cx4yf"]
 radius = 28.0
@@ -150,6 +151,12 @@ libraries = {
 root_node = NodePath("../AnimationPlayer")
 tree_root = SubResource("AnimationNodeBlendSpace2D_qhvu5")
 parameters/blend_position = Vector2(0, 0)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.54
+shadow_enabled = true
+texture = ExtResource("9_l7bi0")
+texture_scale = 7.5
 
 [connection signal="pressed" from="UiLayer/OpenDebug" to="." method="_on_open_debug_pressed"]
 [connection signal="body_entered" from="ItemPickupHitbox" to="." method="_on_item_detected"]

@@ -98,17 +98,6 @@ size = Vector2(307.2, 265.395)
 [node name="Hoe" instance=ExtResource("1_51l0f")]
 script = ExtResource("2_kd036")
 right_held_down = false
-knockback_magnitude = 300.0
-elemental_damage_type = 0
-elemental_damage = 0.0
-elemental_damage_duration = 1.0
-xp = {
-"attack_speed_xp": 0,
-"damage_xp": 0,
-"elemental_damage_duration_xp": 0,
-"elemental_damage_xp": 0,
-"knockback_magnitude_xp": 0
-}
 
 [node name="ItemSprite" parent="." index="1"]
 visible = false

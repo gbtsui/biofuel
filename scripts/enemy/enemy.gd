@@ -1,9 +1,9 @@
 extends CharacterBody2D
 class_name Enemy
 
-@export var hp: int = 100
-@export var baseSpeed = 200
-@export var currentSpeed = 200
+@export var hp: float = 100
+@export var baseSpeed: float = 200
+@export var currentSpeed: float = 200
 
 @export var weight = 1
 
@@ -12,10 +12,9 @@ class_name Enemy
 
 @export var target_distance_threshold = 100
 
-@export var selfEffect := EFFECT.NORMAL
+@export var selfEffect := Bullet.BULLET_EFFECT.NORMAL
 @export var effect_damage: float = 0
-var effect_timer = 0
-var effect_duration_timer = 0
+var effect_timer: float = 0
 # @export var pathfind_mode: PATHFIND_MODE = PATHFIND_MODE.SEARCH_PLAYER
 
 @onready var hurtbox = $Hurtbox
@@ -38,17 +37,8 @@ var danger = []
 
 var chosen_dir = Vector2.ZERO
 
-enum EFFECT {
-	NORMAL,
-	FIRE,
-	CORROSION,
-	SLOW,
-	FREEZE
-}
-
 enum PATHFIND_MODE {
-	SEARCH_PLAYER,
-	SEARCH_CROP,
+	WALKING,
 	ATTACKING
 }
 
@@ -59,10 +49,12 @@ enum PATHFIND_TYPE {
 }
 
 func die() -> void:
+	#handle item drop stuff here ig???
 	modulate = Color("1f1e33")
 	queue_free()
+	
 
-func damage(dmg: int) -> void:
+func damage(dmg: float) -> void:
 	hp = hp - dmg
 	modulate = Color("e20000")
 	await get_tree().create_timer(0.1).timeout
@@ -71,9 +63,9 @@ func damage(dmg: int) -> void:
 		die()
 
 func set_effect(effect, effect_duration, effect_damage):
-	if (effect == EFFECT.FIRE):
-		selfEffect = effect
-		effect_duration_timer = effect_duration
+	self.selfEffect = effect
+	self.effect_timer = effect_duration
+	self.effect_damage = effect_damage
 
 func find_target():
 	var target_controller: TargetController = get_tree().get_root().get_node("World").target_controller
@@ -105,22 +97,21 @@ func _process(delta: float) -> void:
 	if effect_timer < 0:
 		effect_timer = 1
 		match selfEffect:
-			EFFECT.NORMAL:
+			Bullet.BULLET_EFFECT.NORMAL:
 				self.currentSpeed = baseSpeed
-			EFFECT.FIRE:
+			Bullet.BULLET_EFFECT.FIRE:
 				modulate = Color("e20000")
 				self.damage(effect_damage)
-			EFFECT.CORROSION:
+			Bullet.BULLET_EFFECT.CORROSION:
 				self.damage(effect_damage)
 				self.currentSpeed = baseSpeed * 0.75
-			EFFECT.SLOW:
+			Bullet.BULLET_EFFECT.SLOW:
 				self.currentSpeed = baseSpeed * 0.25
 	
-	if (effect_duration_timer < 0):
-		selfEffect = EFFECT.NORMAL
+	if (effect_timer < 0):
+		selfEffect = Bullet.BULLET_EFFECT.NORMAL
 	
-	effect_timer = effect_timer - delta
-	effect_duration_timer = effect_duration_timer - delta
+	effect_timer -= delta
 	'''
 	if pathfind_mode == PATHFIND_MODE.SEARCH_PLAYER:
 		var player = get_tree().get_root().get_node("World/Player")
@@ -142,13 +133,25 @@ func _process(delta: float) -> void:
 		
 		seek = seek_force
 		avoid = avoid_force
+		handle_walk_animation(delta)
 		#velocity = self.global_position.direction_to(current_target.global_position) * currentSpeed * delta
 	else:
+		attack()
 		velocity = Vector2.ZERO
+
+	knockback_vector = knockback_vector.move_toward(Vector2.ZERO, delta * 1000)
+	velocity = knockback_vector * delta if knockback_vector else velocity
 	move_and_collide(velocity)
 	queue_redraw()
 	
-	$Label.text = str(hp)
+	#$Label.text = str(hp)
+
+func handle_walk_animation(delta: float):
+	if velocity.normalized().x >= 0:
+		$SpriteContainer.scale = Vector2(-1, 1)
+	elif velocity.normalized().x <= 0:
+		$SpriteContainer.scale = Vector2(1, 1)
+
 
 var seek = Vector2.ZERO
 var avoid = Vector2.ZERO
@@ -159,7 +162,8 @@ func _draw() -> void:
 	draw_line(Vector2.ZERO, velocity, Color(0,0,0))
 
 func attack() -> void:
-	$AnimationPlayer.play("attack")
+	$SpriteContainer/AnimationPlayer.play("attack")
+	#await get_tree().create_timer($SpriteContainer/AnimationPlayer.get_animation("attack").length)
 	# add a finite state machine ashdiohfaoidshudafsfdsa
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:

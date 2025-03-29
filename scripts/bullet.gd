@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Bullet
 
 @export var speed: float = 750.0
-@export var damage: int = 10
+@export var damage: float = 10
 
 @export var bullet_effect = BULLET_EFFECT.NORMAL
 @export var bullet_effect_duration: float = 0

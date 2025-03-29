@@ -37,12 +37,13 @@ static func append_material_data(crafting_material: CraftingMaterial, material_n
 	var material_data = CRAFTING_MATERIALS.get(material_name)
 	
 	if !material_data:
-		push_error("material " + material_name + " doesnt exist!")
+		print("material doesn't exist!")
+		return
 	
 	print(material_data)
-	
-	crafting_material.item_name = material_name
-	crafting_material.xp_upgrade_values = material_data.xp_upgrade_values
-	crafting_material.item_texture_path = material_data.item_texture
+	crafting_material.data = ItemData.new()
+	crafting_material.data.item_name = material_name
+	crafting_material.data.xp_upgrade_values = material_data.xp_upgrade_values
+	crafting_material.data.item_texture_path = material_data.item_texture
 	
 	return crafting_material

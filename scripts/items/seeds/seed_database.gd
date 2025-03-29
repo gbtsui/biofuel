@@ -46,15 +46,19 @@ static func append_seed_data(seed: Seed, seed_name: String):
 	if !seed_name: 
 		return null
 	
-	seed.item_name = seed_data.crop_name + "_seed"
-	seed.crop_name = seed_data.crop_name
-	seed.growth_time = seed_data.growth_time
-	seed.yield_min = seed_data.yield_min
-	seed.yield_max = seed_data.yield_max
+	var data = SeedData.new()
 	
-	seed.seed_hp = seed_data.seed_hp if seed_data.has("seed_hp") else 50.0
+	data.item_name = seed_data.crop_name + "_seed"
+	data.crop_name = seed_data.crop_name
+	data.growth_time = seed_data.growth_time
+	data.yield_min = seed_data.yield_min
+	data.yield_max = seed_data.yield_max
 	
-	seed.item_texture_path = seed_data.packet_texture if seed_data.has("packet_texture") else "res://assets/sprites/unsorted/seed_packet.png"
-	seed.seed_texture = load(seed_data.seed_texture) if seed_data.has("seed_texture") else load("res://assets/sprites/unsorted/seed.png")
+	data.seed_hp = seed_data.seed_hp if seed_data.has("seed_hp") else 50.0
+	
+	data.item_texture_path = seed_data.packet_texture if seed_data.has("packet_texture") else "res://assets/sprites/unsorted/seed_packet.png"
+	data.seed_texture_path = seed_data.seed_texture if seed_data.has("seed_texture") else "res://assets/sprites/unsorted/seed.png"
+	
+	seed.data = data
 	
 	return seed

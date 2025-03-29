@@ -5,7 +5,6 @@
 
 [node name="Weapon" instance=ExtResource("1_xuf1b")]
 script = ExtResource("2_medui")
-cooldown = 0.5
 
 [node name="CooldownTimer" type="Timer" parent="." index="2"]
 one_shot = true

@@ -8,9 +8,9 @@ extends MeleeWeapon
 var exclusion_zones: Array[ExclusionZone] = []
 
 func _ready():
-	item_name = "hoe"
-	offset = 10
-	item_texture_path = "res://assets/sprites/weapons/hoe.png"
+	data.item_name = "hoe"
+	data.offset = 10
+	data.item_texture_path = "res://assets/sprites/weapons/hoe.png"
 	damage = 20
 	super()
 
@@ -34,7 +34,7 @@ func _process(delta) -> void:
 		else:
 			$Target.modulate = Color("ffffff50")
 	
-	if mode == MODE.ACTIVE_ITEM:
+	if data.mode == MODE.ACTIVE_ITEM:
 		if Input.is_action_just_pressed("mouseRight") and fireable and get_parent().player_mode == Player.PLAYER_MODE.PLAYABLE:
 			right_held_down = true
 		elif Input.is_action_just_released("mouseRight") and fireable and exclusion_zones.size() == 0 and get_parent().player_mode == Player.PLAYER_MODE.PLAYABLE:

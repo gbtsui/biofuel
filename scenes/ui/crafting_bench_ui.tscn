@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://c06g68gwpjmdn"]
+[gd_scene load_steps=4 format=3 uid="uid://c06g68gwpjmdn"]
 
 [ext_resource type="PackedScene" uid="uid://5dfg3lg3hgu2" path="res://scenes/ui/interactable_ui.tscn" id="1_3bv65"]
 [ext_resource type="Script" path="res://scripts/ui/crafting_bench_ui.gd" id="2_wsif3"]
+[ext_resource type="Script" path="res://scripts/items/item_recipe.gd" id="3_tuxvh"]
 
-[node name="InteractableUi" node_paths=PackedStringArray("options") instance=ExtResource("1_3bv65")]
+[node name="InteractableUi" instance=ExtResource("1_3bv65")]
 script = ExtResource("2_wsif3")
-options = []
+selected_option = null
+options = Array[ExtResource("3_tuxvh")]([])
 
 [node name="Label" parent="." index="2"]
 text = "crafting bench, like from minecraft but not really"

@@ -137,6 +137,8 @@ func damage(dmg: float):
 	modulate = Color(1,1,1)
 	if stats.hp <= 0:
 		emit_signal("player_died")
+		$Collision.disabled = true
+	print(stats.hp)
 
 signal player_died
 

@@ -1,4 +1,4 @@
-extends Node
+extends Resource
 class_name ItemRecipe
 
 @export var item_path: String # for the actual item's path

@@ -2,9 +2,16 @@ extends Node
 
 @export var items: Array[Item] = [] : 
 	set (value):
-		_set_items(value)
+		items = value
 	get:
 		return items
+
+@export var items_data: Array[ItemData] = []:
+	set(value):
+		items_data = value
+	get:
+		return items_data
+
 @export var active_item: Item
 @export var active_item_index: int
 @export var max_items: int = 9
@@ -22,7 +29,7 @@ func _ready() -> void:
 func set_inventory_label() -> void:
 	if active_item:
 		#inventory_label.text = active_item.item_name
-		inventory_label.text = str(active_item.amount_in_stack)
+		inventory_label.text = str(active_item.data.amount_in_stack)
 		active_item_rect.texture = active_item.item_sprite.texture
 	else:
 		inventory_label.text = "no active item"
@@ -33,7 +40,7 @@ func set_inventory_label() -> void:
 	for item in items:
 		var item_frame: ItemFrame = Item_Frame.instantiate()
 		item_frame.texture = item.item_sprite.texture
-		item_frame.item_quantity = item.amount_in_stack
+		item_frame.item_quantity = item.data.amount_in_stack
 		if item != active_item:
 			item_frame.self_modulate = Color(0, 0, 0,)
 		else:
@@ -55,7 +62,7 @@ func drop_item():
 	var index = items.find(active_item)
 	items.remove_at(index)
 	active_item.change_mode(Item.MODE.GROUND_ITEM)
-	active_item.reparent(get_tree().get_root())
+	active_item.reparent(get_tree().get_root().get_node("World"))
 	if items.size() >= 1:
 		active_item = items[index-1]
 		active_item.global_transform = player.transform
@@ -67,9 +74,9 @@ func drop_item():
 
 func subtract_item(item_name: String, amount: int):
 	for item in items:
-		if item_name == item.item_name:
-			item.amount_in_stack = item.amount_in_stack - amount
-		if item.amount_in_stack <= 0:
+		if item_name == item.data.item_name:
+			item.data.amount_in_stack = item.data.amount_in_stack - amount
+		if item.data.amount_in_stack <= 0:
 			items.remove_at(items.find(item))
 			active_item = null
 			switch_item(active_item_index + 1)
@@ -83,8 +90,8 @@ func pickup_item(item: Item):
 	var item_is_unique = true
 	var new_item: Item
 	for stashed_item in items:
-		if item.item_name == stashed_item.item_name and stashed_item.stackable:
-			stashed_item.amount_in_stack += item.amount_in_stack
+		if item.data.item_name == stashed_item.data.item_name and stashed_item.data.stackable:
+			stashed_item.data.amount_in_stack += item.data.amount_in_stack
 			item_is_unique = false
 			new_item = stashed_item
 			break
@@ -98,7 +105,7 @@ func pickup_item(item: Item):
 	if items.size() > max_items:
 		items.remove_at(items.find(active_item))
 		active_item.change_mode(Item.MODE.GROUND_ITEM)
-		active_item.reparent(get_tree().get_root())
+		active_item.reparent(get_tree().get_root().get_node("World"))
 	
 	if !new_item:
 		active_item = item
@@ -114,16 +121,13 @@ func pickup_item(item: Item):
 	
 	set_inventory_label()
 
-func _set_items(value: Array[Item]):
-	items = value
-
 func _input(event) -> void:
 	if event is InputEventKey:
 		if event.pressed:
 			# Map number keys 1-9 to item indices 0-8
 			if int(event.as_text_key_label()) >= 1 and int(event.as_text_key_label()) <= 9:
 				var index = int(event.as_text_key_label()) - 1
-				if items.size() > int(event.as_text_key_label()):
+				if items.size() < int(event.as_text_key_label()):
 					return
 				switch_item(index)
 
@@ -146,3 +150,9 @@ func switch_item(index) -> void:
 	active_item.reparent(player)
 	
 	set_inventory_label()
+	update_item_data_array()
+
+func update_item_data_array():
+	items_data = []
+	for item in items:
+		items_data.append(item.data)

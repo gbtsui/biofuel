@@ -9,7 +9,7 @@ func _spawn_item() -> void:
 		$CraftingMaterialCreator/ItemName.text = "material doesn't exist!"
 		return
 	else:
-		$CraftingMaterialCreator/ItemName.text = new_material_instance.item_name + " necessarily exists."
+		$CraftingMaterialCreator/ItemName.text = new_material_instance.data.item_name + " necessarily exists."
 	new_material_instance.global_position = Vector2(int($CraftingMaterialCreator/HBoxContainer/xInput.text), int($CraftingMaterialCreator/HBoxContainer/yInput.text))
 	
-	get_tree().get_root().add_child(new_material_instance)
+	get_tree().get_root().get_node("World").add_child(new_material_instance)

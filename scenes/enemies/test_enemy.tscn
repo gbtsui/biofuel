@@ -1,99 +1,38 @@
-[gd_scene load_steps=8 format=3 uid="uid://df2slhmycc23b"]
+[gd_scene load_steps=6 format=3 uid="uid://df2slhmycc23b"]
 
 [ext_resource type="PackedScene" uid="uid://0pa4tm4q12hc" path="res://scenes/enemies/enemy.tscn" id="1_mgxni"]
 [ext_resource type="Texture2D" uid="uid://r4d6vww4n6u6" path="res://icon.svg" id="2_hx5j1"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ht7l1"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f2nn7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1i11o"]
-size = Vector2(154, 156)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jar0n"]
 
-[sub_resource type="Animation" id="Animation_4yk0t"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hurtbox/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_o5cl4"]
-resource_name = "attack"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hurtbox/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.233333),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.166667, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.36913, 1.36585), Vector2(1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8yq8c"]
-_data = {
-"RESET": SubResource("Animation_4yk0t"),
-"attack": SubResource("Animation_o5cl4")
-}
+[sub_resource type="CircleShape2D" id="CircleShape2D_58xjc"]
+radius = 87.2066
 
 [node name="Enemy" instance=ExtResource("1_mgxni")]
 
 [node name="CollisionShape2D" parent="." index="0"]
-shape = SubResource("CircleShape2D_ht7l1")
+shape = SubResource("RectangleShape2D_f2nn7")
 
-[node name="Sprite2D" parent="." index="1"]
-texture = ExtResource("2_hx5j1")
+[node name="LightOccluder2D" parent="." index="1"]
+occluder = SubResource("OccluderPolygon2D_jar0n")
 
-[node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2(-2, 1)
-shape = SubResource("RectangleShape2D_1i11o")
-disabled = true
-
-[node name="AnimationPlayer" parent="." index="3"]
-libraries = {
-"": SubResource("AnimationLibrary_8yq8c")
-}
-
-[node name="Label" type="Label" parent="." index="4"]
+[node name="Label" type="Label" parent="." index="2"]
 offset_left = -17.0
 offset_top = -103.0
 offset_right = 23.0
 offset_bottom = -80.0
 
-[node name="DebugLabel2" type="Label" parent="." index="5"]
+[node name="DebugLabel2" type="Label" parent="." index="3"]
 offset_left = -21.0
 offset_top = 92.0
 offset_right = 19.0
 offset_bottom = 115.0
+
+[node name="Sprite2D" parent="SpriteContainer" index="0"]
+texture = ExtResource("2_hx5j1")
+
+[node name="CollisionShape2D" parent="SpriteContainer/Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_58xjc")
+disabled = true
