@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://dtls1fe8poqma"]
+[gd_scene load_steps=18 format=4 uid="uid://dtls1fe8poqma"]
 
 [ext_resource type="Script" path="res://scripts/helper/world.gd" id="1_1dtt6"]
 [ext_resource type="PackedScene" uid="uid://b1f0yvqffglf3" path="res://scenes/player.tscn" id="1_v2x1v"]
@@ -6,7 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bquvpkoa51qi7" path="res://assets/sprites/environment/signature.png" id="3_3belg"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="5_117gj"]
 [ext_resource type="PackedScene" uid="uid://cunjitgu5n442" path="res://scenes/home/interactables/crafting_bench.tscn" id="8_en705"]
-[ext_resource type="PackedScene" uid="uid://dwyrjghsyar6c" path="res://scenes/enemies/blank_aphid.tscn" id="10_oorky"]
+[ext_resource type="PackedScene" uid="uid://eg8tbf8uata6" path="res://scenes/enemies/spawn_point.tscn" id="9_tflit"]
+[ext_resource type="PackedScene" uid="uid://bvcgjhxm7wv5f" path="res://scenes/items/weapons/melee/hoe.tscn" id="10_uroo0"]
 [ext_resource type="Script" path="res://scripts/helper/target_controller.gd" id="12_iu1hs"]
 [ext_resource type="PackedScene" uid="uid://ckmvmup0ryy8p" path="res://scenes/home/interactables/upgrade_station.tscn" id="12_qxhn3"]
 
@@ -110,52 +111,19 @@ position = Vector2(0, -3700)
 shape = SubResource("WorldBoundaryShape2D_hcfnj")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.252028, 0.252028, 0.252028, 1)
 
-[node name="BlankAphid" parent="." instance=ExtResource("10_oorky")]
-position = Vector2(-627.193, -359)
+[node name="SpawnPoint" parent="." instance=ExtResource("9_tflit")]
+position = Vector2(-5644.73, 4260)
 
-[node name="BlankAphid2" parent="." instance=ExtResource("10_oorky")]
-position = Vector2(-556.634, 86)
+[node name="SpawnPoint2" parent="." instance=ExtResource("9_tflit")]
+position = Vector2(7498.87, 4324)
 
-[node name="BlankAphid3" parent="." instance=ExtResource("10_oorky")]
-position = Vector2(-137.198, -359)
+[node name="SpawnPoint3" parent="." instance=ExtResource("9_tflit")]
+position = Vector2(-5624.16, -3621)
 
-[node name="BlankAphid4" parent="." instance=ExtResource("10_oorky")]
-position = Vector2(278.317, -579)
+[node name="SpawnPoint4" parent="." instance=ExtResource("9_tflit")]
+position = Vector2(7498.87, -3642)
 
-[node name="BlankAphid5" parent="." instance=ExtResource("10_oorky")]
-position = Vector2(-414.535, -571)
-
-[node name="BlankAphid6" parent="." instance=ExtResource("10_oorky")]
-position = Vector2(851.61, -83)
-
-[node name="BlankAphid7" parent="." instance=ExtResource("10_oorky")]
-position = Vector2(822.211, -350)
-
-[node name="BlankAphid8" parent="." instance=ExtResource("10_oorky")]
-position = Vector2(-414.535, -210)
-
-[node name="BlankAphid9" parent="." instance=ExtResource("10_oorky")]
-position = Vector2(-33.3196, -706)
-
-[node name="BlankAphid10" parent="." instance=ExtResource("10_oorky")]
-position = Vector2(174.438, -393)
-
-[node name="BlankAphid11" parent="." instance=ExtResource("10_oorky")]
-position = Vector2(-1150.51, -28)
-
-[node name="BlankAphid12" parent="." instance=ExtResource("10_oorky")]
-position = Vector2(-859.45, -147)
-
-[node name="BlankAphid13" parent="." instance=ExtResource("10_oorky")]
-position = Vector2(-1063.29, -384)
-
-[node name="BlankAphid14" parent="." instance=ExtResource("10_oorky")]
-position = Vector2(-681.092, -651)
-
-[node name="BlankAphid15" parent="." instance=ExtResource("10_oorky")]
-position = Vector2(-390.035, -855)
-
-[node name="BlankAphid16" parent="." instance=ExtResource("10_oorky")]
-position = Vector2(195.998, -867)
+[node name="Hoe" parent="." instance=ExtResource("10_uroo0")]
+position = Vector2(-121.519, 236)
+right_held_down = false

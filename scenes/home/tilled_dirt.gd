@@ -56,6 +56,15 @@ func _on_body_entered(body: Node2D) -> void:
 		$PlantingTimer.start()
 		target_controller.add_target(self)
 
+func damage(dmg: float):
+	data.crop_hp -= dmg
+	if data.crop_hp <= 0:
+		data.crop_hp = 0
+		data.current_crop = ""
+		data.harvestable = false
+		$PlantingTimer.stop()
+		
+
 func _on_planting_timer_timeout() -> void:
 	$Label.text = "harvestable btw"
 	data.harvestable = true

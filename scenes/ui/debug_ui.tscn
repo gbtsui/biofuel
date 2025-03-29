@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmgynbmw0k6vu"]
+[gd_scene load_steps=5 format=3 uid="uid://dmgynbmw0k6vu"]
 
 [ext_resource type="PackedScene" uid="uid://5dfg3lg3hgu2" path="res://scenes/ui/interactable_ui.tscn" id="1_fifml"]
 [ext_resource type="Script" path="res://scripts/ui/debug_ui.gd" id="2_uc1dw"]
 [ext_resource type="Script" path="res://scenes/ui/debug/items_debugger.gd" id="3_4vggj"]
+[ext_resource type="Script" path="res://scripts/ui/enemy_debug_ui.gd" id="4_32o31"]
 
 [node name="DebugUi" instance=ExtResource("1_fifml")]
 script = ExtResource("2_uc1dw")
@@ -15,9 +16,10 @@ anchor_bottom = 1.0
 offset_top = 64.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 0
+current_tab = 1
 
 [node name="Items" type="HBoxContainer" parent="TabContainer" index="1"]
+visible = false
 layout_mode = 2
 script = ExtResource("3_4vggj")
 metadata/_tab_index = 0
@@ -58,7 +60,29 @@ text = "create machines"
 layout_mode = 2
 text = "Item Name printed here if successful!"
 
+[node name="Enemies" type="HBoxContainer" parent="TabContainer" index="2"]
+layout_mode = 2
+script = ExtResource("4_32o31")
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Enemies" index="0"]
+layout_mode = 2
+
+[node name="EnemyName" type="LineEdit" parent="TabContainer/Enemies/VBoxContainer" index="0"]
+layout_mode = 2
+placeholder_text = "name"
+
+[node name="Button" type="Button" parent="TabContainer/Enemies/VBoxContainer" index="1"]
+layout_mode = 2
+text = "spawn that jawn"
+
+[node name="Button" type="Button" parent="TabContainer/Enemies" index="1"]
+layout_mode = 2
+text = "kill everything"
+
 [node name="Label" parent="." index="3"]
 text = "debugging, are we?"
 
 [connection signal="pressed" from="TabContainer/Items/CraftingMaterialCreator/Button" to="TabContainer/Items" method="_spawn_item"]
+[connection signal="pressed" from="TabContainer/Enemies/VBoxContainer/Button" to="TabContainer/Enemies" method="_spawn_enemy"]
+[connection signal="pressed" from="TabContainer/Enemies/Button" to="TabContainer/Enemies" method="_kill_all_enemies"]

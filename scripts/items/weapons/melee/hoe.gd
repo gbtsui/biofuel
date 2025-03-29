@@ -5,13 +5,9 @@ extends MeleeWeapon
 
 @export var right_held_down: bool = false
 
-var exclusion_zones: Array[ExclusionZone] = []
+var exclusion_zones: Array[Area2D] = []
 
 func _ready():
-	data.item_name = "hoe"
-	data.offset = 10
-	data.item_texture_path = "res://assets/sprites/weapons/hoe.png"
-	damage = 20
 	super()
 
 func till():
@@ -21,10 +17,12 @@ func till():
 	var dirt_instance = tilled_dirt.instantiate()
 	dirt_instance.position = pos
 	get_tree().get_root().get_node("World").add_child(dirt_instance)
-	reset_cooldown_timer(attack_speed)
+	reset_cooldown_timer(data.attack_speed)
 
 func _process(delta) -> void:
 	super(delta)
+	
+	$Label.text = str(exclusion_zones)
 	
 	if right_held_down:
 		$Target.visible = true
@@ -35,18 +33,14 @@ func _process(delta) -> void:
 			$Target.modulate = Color("ffffff50")
 	
 	if data.mode == MODE.ACTIVE_ITEM:
-		if Input.is_action_just_pressed("mouseRight") and fireable and get_parent().player_mode == Player.PLAYER_MODE.PLAYABLE:
+		if Input.is_action_pressed("mouseRight") and fireable and get_parent().player_mode == Player.PLAYER_MODE.PLAYABLE:
 			right_held_down = true
 		elif Input.is_action_just_released("mouseRight") and fireable and exclusion_zones.size() == 0 and get_parent().player_mode == Player.PLAYER_MODE.PLAYABLE:
 			till()
 			right_held_down = false
 
 func _on_exclusionzone_detected(area: Area2D) -> void:
-	if area is ExclusionZone:
-		exclusion_zones.append(area)
-	$Label.text = str(exclusion_zones)
+	exclusion_zones.append(area)
 
 func _on_exclusionzone_undetected(area: Area2D) -> void:
-	if area is ExclusionZone:
-		exclusion_zones.remove_at(exclusion_zones.find(area))
-	$Label.text = str(exclusion_zones)
+	exclusion_zones.remove_at(exclusion_zones.find(area))

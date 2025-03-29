@@ -1,9 +1,37 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvcgjhxm7wv5f"]
+[gd_scene load_steps=12 format=3 uid="uid://bvcgjhxm7wv5f"]
 
 [ext_resource type="PackedScene" uid="uid://c2p2plr1c1v1c" path="res://scenes/items/weapons/melee/melee_weapon.tscn" id="1_51l0f"]
 [ext_resource type="Script" path="res://scripts/items/weapons/melee/hoe.gd" id="2_kd036"]
+[ext_resource type="Script" path="res://scripts/helper/save_this_wrld/melee_weapon_data.gd" id="3_i2fvd"]
 [ext_resource type="Texture2D" uid="uid://bnq7mg4pc5grm" path="res://assets/sprites/weapons/hoe.png" id="3_tl0qe"]
-[ext_resource type="Texture2D" uid="uid://bx08e3jta0i8o" path="res://assets/sprites/unsorted/tilled_dirt.png" id="4_kbxto"]
+[ext_resource type="Texture2D" uid="uid://c5ttqsvyhfvcv" path="res://assets/sprites/environment/tilled_dirt.png" id="5_r0cai"]
+
+[sub_resource type="Resource" id="Resource_h2l4q"]
+script = ExtResource("3_i2fvd")
+xp = {
+"attack_speed_xp": 0,
+"damage_xp": 0,
+"elemental_damage_duration_xp": 0,
+"elemental_damage_xp": 0,
+"knockback_magnitude_xp": 0
+}
+weapon_scene_path = "res://scenes/items/weapons/melee/hoe.tscn"
+damage = 20.0
+attack_speed = 1.0
+knockback_magnitude = 150.0
+elemental_damage_type = 0
+elemental_damage = 0.0
+elemental_damage_duration = 0.0
+mode = 0
+rotatable = true
+offset = 50.0
+item_name = "default_item"
+amount_in_stack = 1
+stackable = false
+item_texture_path = ""
+xp_upgrade_values = {}
+item_global_position = Vector2(0, 0)
+item_type = 0
 
 [sub_resource type="Animation" id="Animation_6rhgp"]
 length = 0.001
@@ -92,12 +120,13 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ifxxk"]
 size = Vector2(49, 20)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f61gu"]
-size = Vector2(307.2, 265.395)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fa0oy"]
+size = Vector2(96, 96)
 
 [node name="Hoe" instance=ExtResource("1_51l0f")]
 script = ExtResource("2_kd036")
 right_held_down = false
+data = SubResource("Resource_h2l4q")
 
 [node name="ItemSprite" parent="." index="1"]
 visible = false
@@ -127,16 +156,17 @@ texture = ExtResource("3_tl0qe")
 visible = false
 modulate = Color(1, 0, 0, 0.282353)
 position = Vector2(163, -2)
-texture = ExtResource("4_kbxto")
+texture = ExtResource("5_r0cai")
 
 [node name="TargetMarker" type="Marker2D" parent="Target" index="0"]
+position = Vector2(-3, 2)
 
 [node name="ExclusionZoneDetector" type="Area2D" parent="Target" index="1"]
-collision_mask = 128
+collision_mask = 72
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Target/ExclusionZoneDetector" index="0"]
-position = Vector2(-3.05176e-05, 1.17432)
-shape = SubResource("RectangleShape2D_f61gu")
+position = Vector2(-3, 2)
+shape = SubResource("RectangleShape2D_fa0oy")
 
 [node name="Label" type="Label" parent="." index="6"]
 offset_right = 40.0

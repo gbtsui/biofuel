@@ -4,7 +4,7 @@ class_name Player
 @onready var inventory: Node = get_node("Inventory")
 @onready var inventory_ui: Control = get_node("UiLayer/InventoryUi")
 
-var stats: PlayerStats = null:
+@export var stats: PlayerStats = null:
 	set (value):
 		stats = value
 	get:
@@ -27,6 +27,8 @@ var closest_interactable: Interactable = null
 var moving: bool = false
 
 var current_ui: InteractableUi
+
+@onready var light: PointLight2D = $PointLight2D
 
 func _ready() -> void:
 	print(ItemRecipeDatabase.get_item_recipes())

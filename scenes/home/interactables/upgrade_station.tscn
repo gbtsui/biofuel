@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ckmvmup0ryy8p"]
+[gd_scene load_steps=6 format=3 uid="uid://ckmvmup0ryy8p"]
 
 [ext_resource type="PackedScene" uid="uid://x8s8moof24y8" path="res://scenes/home/interactables/interactable.tscn" id="1_fmec3"]
 [ext_resource type="Script" path="res://scripts/upgrade_station.gd" id="2_mmrdj"]
@@ -9,9 +9,6 @@ size = Vector2(175, 179)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ruh1"]
 size = Vector2(372, 312.5)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dtbcq"]
-polygon = PackedVector2Array(-47, 155, -22, 178, 46, 175, 65, 145, 62, 118, 93, 95, 91, 15, 32, 4, 33, -60, 84, -79, 87, -132, 4, -152, -82, -117, -82, -56, -4, -60, -5, 2, -50, 13, -80, 35, -81, 63, -75, 112, -41, 125)
 
 [node name="Interactable" instance=ExtResource("1_fmec3")]
 script = ExtResource("2_mmrdj")
@@ -29,4 +26,4 @@ position = Vector2(-1, 87.25)
 shape = SubResource("RectangleShape2D_7ruh1")
 
 [node name="LightOccluder2D" parent="." index="3"]
-occluder = SubResource("OccluderPolygon2D_dtbcq")
+position = Vector2(453, 1)

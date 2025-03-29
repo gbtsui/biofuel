@@ -7,6 +7,8 @@ const SAVE_PATH = "user://save.tres"
 @export var plots: Array[TilledDirtData]
 @export var items: Array[ItemData]
 @export var inventory: Array[ItemData]
+@export var enemies: Array[EnemyData]
+@export var world_state: WorldData
 
 func write_savegame() -> void:
 	print("Saving game...")

@@ -7,14 +7,29 @@ enum WEAPON_TYPES {
 	SPECIAL
 }
 
+#TODO: replace item_path with just item as a packedscene cuz why not lol
 const WEAPONS := {
 	"scythe": {
 		"type": WEAPON_TYPES.MELEE,
 		"item_path":"res://scenes/items/weapons/melee/scythe.tscn",
+		"offset":75,
 		"data":{
 			"damage":5.0,
 			"attack_speed":1.5,
 			"knockback_magnitude":200,
+			"elemental_damage":0.0,
+			"elemental_damage_duration":0.0,
+			"elemental_damage_type":Bullet.BULLET_EFFECT.NORMAL
+		}
+	},
+	"hoe":{
+		"type": WEAPON_TYPES.MELEE,
+		"item_path": "res://scenes/items/weapons/melee/hoe.tscn",
+		"offset":50,
+		"data":{
+			"damage":20.0,
+			"attack_speed": 1.0,
+			"knockback_magnitude": 150,
 			"elemental_damage":0.0,
 			"elemental_damage_duration":0.0,
 			"elemental_damage_type":Bullet.BULLET_EFFECT.NORMAL

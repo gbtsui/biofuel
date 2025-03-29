@@ -23,6 +23,7 @@ func _create_or_load_save():
 		print("save doesn't exist!")
 		_save = SaveGame.new()
 		_save.player_stats = PlayerStats.new()
+		_save.world_state = WorldData.new()
 		_save.write_savegame()
 	
 	player.global_position = _save.player_stats.global_position
@@ -64,13 +65,21 @@ func _create_or_load_save():
 		elif item_data.item_type == ItemData.ITEM_TYPE.SEED:
 			item_instance = seed_scene.instantiate()
 		elif item_data is WeaponData:
-			item_instance = load(item_data.weapon_scene_path).instantiate()
+			item_instance = item_data.weapon_scene.instantiate()
 		else:
 			item_instance = item_scene.instantiate()
 		
 		item_instance.data = item_data
 		item_instance.global_position = item_data.item_global_position
 		self.add_child(item_instance)
+	
+	for enemy_data in _save.enemies:
+		var enemy_instance = load(enemy_data.enemy_scene_path).instantiate()
+		enemy_instance.data = enemy_data
+		enemy_instance.global_position = enemy_data.enemy_global_position
+		add_child(enemy_instance)
+	
+	$GameController.data = _save.world_state
 
 func save_this_wrld():
 	_save.player_stats.global_position = player.global_position
@@ -79,6 +88,7 @@ func save_this_wrld():
 	var plot_data_array: Array[TilledDirtData] = []
 	var items_data_array: Array[ItemData] = []
 	var inventory: Array[ItemData] = [] # finish later cyka
+	var enemies: Array[EnemyData] = []
 	for item in player.inventory.items:
 		inventory.append(item.data)
 	
@@ -95,7 +105,13 @@ func save_this_wrld():
 			elif child is Seed:
 				data.item_type = ItemData.ITEM_TYPE.SEED
 			items_data_array.append(data)
+		elif child is Enemy:
+			var data = child.data
+			data.enemy_global_position = child.global_position
+			enemies.append(data)
 	_save.items = items_data_array
 	_save.plots = plot_data_array
 	_save.inventory = inventory
+	_save.enemies = enemies
+	_save.world_state = $GameController.data
 	_save.write_savegame()

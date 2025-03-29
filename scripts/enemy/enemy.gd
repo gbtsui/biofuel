@@ -1,14 +1,12 @@
 extends CharacterBody2D
 class_name Enemy
 
-@export var hp: float = 100
-@export var baseSpeed: float = 200
-@export var currentSpeed: float = 200
+@export var data: EnemyData = null:
+	set(value):
+		data = value
+	get:
+		return data
 
-@export var weight = 1
-
-@export var player_target_weight = 1
-@export var plot_target_weight = 1
 
 @export var target_distance_threshold = 100
 
@@ -19,7 +17,6 @@ var effect_timer: float = 0
 
 @onready var hurtbox = $Hurtbox
 
-@export var attack_damage: float = 10.0
 
 @onready var player = get_tree().get_root().get_node("World/Player")
 
@@ -55,11 +52,11 @@ func die() -> void:
 	
 
 func damage(dmg: float) -> void:
-	hp = hp - dmg
+	data.hp = data.hp - dmg
 	modulate = Color("e20000")
 	await get_tree().create_timer(0.1).timeout
 	modulate = Color("ffffff")
-	if (hp < 1):
+	if (data.hp < 1):
 		die()
 
 func set_effect(effect, effect_duration, effect_damage):
@@ -73,10 +70,15 @@ func find_target():
 	if !plot_target:
 		current_target = player
 	else:
-		var weighted_tar_dist = self.global_position.distance_squared_to(plot_target.global_position / plot_target_weight)
-		var weighted_player_dist = self.global_position.distance_squared_to(player.global_position) / player_target_weight
-		$DebugLabel2.text = str(weighted_tar_dist) + " : " + str(weighted_player_dist)
-		current_target = player if weighted_player_dist < weighted_tar_dist else plot_target
+		if (data.plot_target_weight == 0):
+			current_target = player
+		elif (data.player_target_weight == 0):
+			current_target = plot_target
+		else:
+			var weighted_tar_dist = self.global_position.distance_squared_to(plot_target.global_position / data.plot_target_weight)
+			var weighted_player_dist = self.global_position.distance_squared_to(player.global_position) / data.player_target_weight
+			#$DebugLabel2.text = str(weighted_tar_dist) + " : " + str(weighted_player_dist)
+			current_target = player if weighted_player_dist < weighted_tar_dist else plot_target
 	
 	if self.global_position.distance_to(current_target.global_position) < target_distance_threshold:
 		current_target = null
@@ -98,15 +100,15 @@ func _process(delta: float) -> void:
 		effect_timer = 1
 		match selfEffect:
 			Bullet.BULLET_EFFECT.NORMAL:
-				self.currentSpeed = baseSpeed
+				self.data.currentSpeed = data.baseSpeed
 			Bullet.BULLET_EFFECT.FIRE:
 				modulate = Color("e20000")
 				self.damage(effect_damage)
 			Bullet.BULLET_EFFECT.CORROSION:
 				self.damage(effect_damage)
-				self.currentSpeed = baseSpeed * 0.75
+				self.data.currentSpeed = data.baseSpeed * 0.75
 			Bullet.BULLET_EFFECT.SLOW:
-				self.currentSpeed = baseSpeed * 0.25
+				self.data.currentSpeed = data.baseSpeed * 0.25
 	
 	if (effect_timer < 0):
 		selfEffect = Bullet.BULLET_EFFECT.NORMAL
@@ -125,11 +127,11 @@ func _process(delta: float) -> void:
 	find_target()
 	if current_target:
 		var seek_force = steering_agent.seek(self.global_position, current_target.global_position, velocity, 1) 
-		var avoid_force = steering_agent.avoid_obstacles(self.global_position, velocity, 1, 16) * currentSpeed * delta
+		var avoid_force = steering_agent.avoid_obstacles(self.global_position, velocity, 5, 16) * data.currentSpeed * delta
 		var steering = seek_force + avoid_force
 		#$DebugLabel2.text = str(seek_force) + " " + str(avoid_force)
 		velocity += steering
-		velocity = velocity.normalized() * currentSpeed * delta
+		velocity = velocity.normalized() * data.currentSpeed * delta
 		
 		seek = seek_force
 		avoid = avoid_force
@@ -166,12 +168,20 @@ func attack() -> void:
 	#await get_tree().create_timer($SpriteContainer/AnimationPlayer.get_animation("attack").length)
 	# add a finite state machine ashdiohfaoidshudafsfdsa
 
+func heal(amount: float):
+	pass
+
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body is Player:
-		body.damage(attack_damage)
+		body.damage(data.attack_damage)
 
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	#if area is TilledDirt:
+	#	area.damage(data.plot_attack_damage)
+	pass
+	
 func knockback(direction: Vector2, magnitude: float):
 	#committing crimes with direction and magnitude, OH YEAH
-	knockback_vector = (direction * magnitude)/weight
+	knockback_vector = (direction * magnitude)/data.weight
 	$DebugLabel2.text = str(magnitude)
 	pass
