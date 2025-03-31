@@ -1,0 +1,17 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://dtx7m8o163hvs"]
+
+[ext_resource type="StyleBox" uid="uid://vbrf4unoacfn" path="res://shaders/panel_style_box.tres" id="1_5olib"]
+[ext_resource type="FontFile" uid="uid://bimdnvclrsqkk" path="res://assets/fonts/Handwriting-Regular.ttf" id="1_qx0qc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_65iq4"]
+
+[resource]
+Button/font_sizes/font_size = 50
+Button/fonts/font = ExtResource("1_qx0qc")
+Label/colors/font_color = Color(0.241156, 0.241156, 0.241156, 1)
+Label/colors/font_shadow_color = Color(0.552956, 0.552955, 0.552956, 0.298039)
+Label/font_sizes/font_size = 50
+Label/fonts/font = ExtResource("1_qx0qc")
+Panel/styles/panel = ExtResource("1_5olib")
+PanelContainer/styles/panel = ExtResource("1_5olib")
+TooltipPanel/styles/panel = SubResource("StyleBoxEmpty_65iq4")

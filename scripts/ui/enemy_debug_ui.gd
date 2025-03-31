@@ -3,12 +3,9 @@ extends HBoxContainer
 
 func _spawn_enemy() -> void:
 	var enemy_name = $VBoxContainer/EnemyName.text
-	var data: EnemyData = EnemyDatabase.get_enemy_data(enemy_name)
-	
-	var instance: Enemy = data.enemy_scene.instantiate()
-	instance.data = data
-	
-	get_tree().get_root().get_node("World").add_child(instance)
+	var game_controller:GameController = get_tree().get_root().get_node("World/GameController")
+	var enemy_data = EnemyDatabase.get_enemy_data(enemy_name)
+	game_controller.spawn_enemy(enemy_data, Vector2.ZERO)
 
 
 func _kill_all_enemies() -> void:

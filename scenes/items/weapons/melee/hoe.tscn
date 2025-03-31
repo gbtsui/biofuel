@@ -25,10 +25,10 @@ elemental_damage_duration = 0.0
 mode = 0
 rotatable = true
 offset = 50.0
-item_name = "default_item"
+item_name = "hoe"
 amount_in_stack = 1
 stackable = false
-item_texture_path = ""
+item_texture_path = "res://assets/sprites/weapons/hoe.png"
 xp_upgrade_values = {}
 item_global_position = Vector2(0, 0)
 item_type = 0
@@ -173,7 +173,6 @@ offset_right = 40.0
 offset_bottom = 23.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-text = "test"
 
 [connection signal="area_entered" from="Target/ExclusionZoneDetector" to="." method="_on_exclusionzone_detected"]
 [connection signal="area_exited" from="Target/ExclusionZoneDetector" to="." method="_on_exclusionzone_undetected"]

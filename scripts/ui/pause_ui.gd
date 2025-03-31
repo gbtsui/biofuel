@@ -14,7 +14,7 @@ func _on_exit_button_pressed() -> void:
 func _on_open_debug_button_pressed() -> void:
 	get_parent().add_child(debug_menu.instantiate())
 	get_parent().get_node("OpenDebug").visible = true
-	$PanelContainer/HBoxContainer/OpenDebugButton.queue_free()
+	$PanelContainer/OpenDebugButton.queue_free()
 	self.visible = false
 
 func _on_button_pressed():

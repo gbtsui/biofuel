@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://2quh54oyuo1x"]
+[gd_scene load_steps=6 format=3 uid="uid://2quh54oyuo1x"]
 
 [ext_resource type="Script" path="res://scenes/home/tilled_dirt.gd" id="1_j52ne"]
 [ext_resource type="Texture2D" uid="uid://c5ttqsvyhfvcv" path="res://assets/sprites/environment/tilled_dirt.png" id="2_kawsi"]
+[ext_resource type="Texture2D" uid="uid://cfwrfxmyjpig6" path="res://assets/sprites/environment/seedling.png" id="3_mrx0h"]
+[ext_resource type="Texture2D" uid="uid://dq8wif4prjgh8" path="res://assets/sprites/environment/grown_seedling.png" id="4_a7fj4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ou2rj"]
 size = Vector2(96.0002, 95.9998)
@@ -23,9 +25,15 @@ shape = SubResource("RectangleShape2D_ou2rj")
 [node name="PlantingTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="Seedling" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -16)
+texture = ExtResource("3_mrx0h")
+
+[node name="Sprout" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -16)
+texture = ExtResource("4_a7fj4")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="PlantingTimer" to="." method="_on_planting_timer_timeout"]

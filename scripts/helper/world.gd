@@ -56,6 +56,8 @@ func _create_or_load_save():
 		tilled_dirt_instance.data = plot
 		tilled_dirt_instance.global_position = plot.plot_global_position
 		self.add_child(tilled_dirt_instance)
+		if plot.current_crop:
+			$TargetController.add_target(tilled_dirt_instance)
 
 	for item_data in _save.items:
 		var item_instance
@@ -65,7 +67,7 @@ func _create_or_load_save():
 		elif item_data.item_type == ItemData.ITEM_TYPE.SEED:
 			item_instance = seed_scene.instantiate()
 		elif item_data is WeaponData:
-			item_instance = item_data.weapon_scene.instantiate()
+			item_instance = load(item_data.weapon_scene_path).instantiate() # TODO: gotta switch this up later to actual scenes btw
 		else:
 			item_instance = item_scene.instantiate()
 		
@@ -78,6 +80,7 @@ func _create_or_load_save():
 		enemy_instance.data = enemy_data
 		enemy_instance.global_position = enemy_data.enemy_global_position
 		add_child(enemy_instance)
+		$GameController.add_enemy_to_array(enemy_instance)
 	
 	$GameController.data = _save.world_state
 
@@ -90,7 +93,8 @@ func save_this_wrld():
 	var inventory: Array[ItemData] = [] # finish later cyka
 	var enemies: Array[EnemyData] = []
 	for item in player.inventory.items:
-		inventory.append(item.data)
+		if item:
+			inventory.append(item.data)
 	
 	for child in children:
 		if child is TilledDirt:

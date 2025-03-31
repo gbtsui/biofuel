@@ -97,6 +97,7 @@ func _physics_process(delta: float) -> void:
 		$AnimationPlayer.play("idle")
 	move_and_collide(velocity * delta)
 	manage_walking_animation(delta)
+	manage_hud()
 	closest_item = get_closest_detected_item()
 	#$Hand.look_at(get_global_mouse_position())
 	#print(get_child_count())
@@ -147,3 +148,7 @@ signal player_died
 func _on_open_debug_pressed() -> void:
 	$UiLayer/DebugUi.visible = true
 	player_mode = PLAYER_MODE.IN_UI
+
+func manage_hud(): #TODO: break out later
+	$UiLayer/TestUi/AspectRatioContainer/TextureProgressBar.max_value = stats.max_hp
+	$UiLayer/TestUi/AspectRatioContainer/TextureProgressBar.value = stats.hp

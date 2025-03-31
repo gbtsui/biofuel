@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://jv585hc5ojy6"]
+
+[ext_resource type="Texture2D" uid="uid://b0vnp6g31jpia" path="res://assets/sprites/ui/upgrade_icons/damage.png" id="1_6hvum"]
+[ext_resource type="Theme" uid="uid://dtx7m8o163hvs" path="res://shaders/ui_theme.tres" id="1_ycjyq"]
+[ext_resource type="Script" path="res://scripts/ui/components/stat_upgrade_bar.gd" id="2_xiho1"]
+
+[node name="StatUpgradeBar" type="PanelContainer"]
+custom_minimum_size = Vector2(384, 72)
+offset_right = 384.0
+offset_bottom = 72.0
+theme = ExtResource("1_ycjyq")
+script = ExtResource("2_xiho1")
+
+[node name="Container" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="StatIcon" type="TextureRect" parent="Container"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("1_6hvum")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="InfoContainer" type="VBoxContainer" parent="Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Stats" type="HBoxContainer" parent="Container/InfoContainer"]
+layout_mode = 2
+
+[node name="CurrentStat" type="Label" parent="Container/InfoContainer/Stats"]
+layout_mode = 2
+text = "CurrentStat"
+
+[node name="PotentialStat" type="Label" parent="Container/InfoContainer/Stats"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.772549, 0, 1)
+text = "PotentialStat
+"
+
+[node name="XPBar" type="ProgressBar" parent="Container/InfoContainer"]
+layout_mode = 2

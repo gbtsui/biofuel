@@ -17,8 +17,7 @@ extends Node
 @export var max_items: int = 9
 
 @onready var player = get_parent()
-@onready var inventory_label: Label = get_parent().get_node("UiLayer/TestUi/Inventory")
-@onready var active_item_rect: TextureRect = get_parent().get_node("UiLayer/TestUi/TextureRect")
+@onready var active_item_rect: TextureRect = get_parent().get_node("UiLayer/TestUi/ItemDisplay/ActiveItem")
 
 @onready var Item_Frame = preload("res://scenes/ui/item_frame.tscn")
 
@@ -29,10 +28,11 @@ func _ready() -> void:
 func set_inventory_label() -> void:
 	if active_item:
 		#inventory_label.text = active_item.item_name
-		inventory_label.text = str(active_item.data.amount_in_stack)
+		#inventory_label.text = str(active_item.data.amount_in_stack)
 		active_item_rect.texture = active_item.item_sprite.texture
 	else:
-		inventory_label.text = "no active item"
+		active_item_rect.texture = null
+	#	inventory_label.text = "no active item"
 	
 	var items_in_container = get_parent().get_node("UiLayer/TestUi/PanelContainer/VBoxContainer").get_children()
 	for existing_item in items_in_container:

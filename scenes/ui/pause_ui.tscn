@@ -1,45 +1,44 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6mx2wiv20qob"]
+[gd_scene load_steps=5 format=3 uid="uid://b6mx2wiv20qob"]
 
 [ext_resource type="PackedScene" uid="uid://5dfg3lg3hgu2" path="res://scenes/ui/interactable_ui.tscn" id="1_6lbcw"]
 [ext_resource type="Script" path="res://scripts/ui/pause_ui.gd" id="2_m1cc5"]
+[ext_resource type="Texture2D" uid="uid://r4d6vww4n6u6" path="res://icon.svg" id="3_c3ani"]
+[ext_resource type="Texture2D" uid="uid://0flvqqsdw417" path="res://assets/sprites/ui/exit.png" id="4_b67vk"]
 
 [node name="InteractableUi" instance=ExtResource("1_6lbcw")]
 script = ExtResource("2_m1cc5")
 
-[node name="PanelContainer" type="PanelContainer" parent="." index="0"]
+[node name="OpenDebugButton" type="Button" parent="PanelContainer" index="0"]
+layout_mode = 2
+offset_left = 992.0
+offset_top = 480.0
+offset_right = 1016.0
+offset_bottom = 504.0
+icon = ExtResource("3_c3ani")
+expand_icon = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" index="1"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -127.5
+offset_top = -15.5
+offset_right = 127.5
+offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" index="0"]
-layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
 [node name="ExitButton" type="Button" parent="PanelContainer/HBoxContainer" index="0"]
 layout_mode = 2
-text = "exit game :("
+tooltip_text = "exit this earth's atomosphere"
+icon = ExtResource("4_b67vk")
+flat = true
 
-[node name="OpenDebugButton" type="Button" parent="PanelContainer/HBoxContainer" index="1"]
-layout_mode = 2
-text = "kill bugs in real life"
-
-[node name="Panel" parent="." index="1"]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_right = 600.0
-offset_bottom = 400.0
-
-[node name="Label" parent="." index="3"]
-text = "not really paused!"
-
+[connection signal="pressed" from="PanelContainer/OpenDebugButton" to="." method="_on_open_debug_button_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="pressed" from="PanelContainer/HBoxContainer/OpenDebugButton" to="." method="_on_open_debug_button_pressed"]

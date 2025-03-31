@@ -16,6 +16,19 @@ class_name TilledDirt
 func _ready():
 	if !data:
 		data = TilledDirtData.new()
+	
+	update_sprites()
+
+
+func update_sprites():
+	if data.current_crop:
+		if data.harvestable:
+			$Sprout.visible = true
+		else:
+			$Seedling.visible = true
+	else:
+		$Sprout.visible = false
+		$Seedling.visible = false
 
 func harvest() -> void:
 	if data.harvestable:
@@ -32,7 +45,6 @@ func harvest() -> void:
 			crop_instance.visible = true
 			get_tree().get_root().get_node("World").add_child(crop_instance)
 		data.harvestable = false
-		$Label.text = ""
 		#current_crop = null
 		data.current_crop = ""
 		target_controller.remove_target(self)
@@ -42,7 +54,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.get_parent() is Seed and !data.current_crop:
 		$CollisionShape2D.disabled = true
 		var current_seed: Seed = body.get_parent()
-		data.current_crop = current_seed.crop_name
+		data.current_crop = current_seed.data.crop_name
 		#current_crop = CraftingMaterialDatabase.get_crafting_material(current_seed.crop_name)#load("res://scenes/items/crops/crop.tscn").instantiate()
 		#current_crop.item_name = current_seed.crop_name
 		# set properties based on seed data here
@@ -55,6 +67,7 @@ func _on_body_entered(body: Node2D) -> void:
 		current_seed.queue_free()
 		$PlantingTimer.start()
 		target_controller.add_target(self)
+		update_sprites()
 
 func damage(dmg: float):
 	data.crop_hp -= dmg
@@ -63,9 +76,11 @@ func damage(dmg: float):
 		data.current_crop = ""
 		data.harvestable = false
 		$PlantingTimer.stop()
-		
+		get_tree().get_root().get_node("World/TargetController").remove_target(self)
+	print(data.crop_hp)
+	update_sprites()
 
 func _on_planting_timer_timeout() -> void:
-	$Label.text = "harvestable btw"
 	data.harvestable = true
+	update_sprites()
 	# get a thingy to set label or sprite not just when planting timer is timed out lol ??? not rn tho

@@ -19,7 +19,7 @@ const DEFINED_WAVES: Dictionary = {
 }
 
 static func get_wave(number: int):
-	var difficulty: int = 0.2 * pow(number, 2) + 2 * number # TODO: honestly idrk the ideal progression curve being fr
+	var difficulty: int = 5 * pow(1.2, number - 1)# TODO: honestly idrk the ideal progression curve being fr
 	
 	if DEFINED_WAVES.has(number):
 		return DEFINED_WAVES[number]

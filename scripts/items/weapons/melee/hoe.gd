@@ -22,7 +22,7 @@ func till():
 func _process(delta) -> void:
 	super(delta)
 	
-	$Label.text = str(exclusion_zones)
+	#$Label.text = str(exclusion_zones)
 	
 	if right_held_down:
 		$Target.visible = true

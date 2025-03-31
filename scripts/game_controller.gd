@@ -1,4 +1,5 @@
 extends Node
+class_name GameController
 
 @onready var player = get_tree().get_root().get_node("World/Player")
 @onready var death_ui = preload("res://scenes/ui/death_ui.tscn")
@@ -7,6 +8,7 @@ extends Node
 @onready var world_modulate: CanvasModulate = get_tree().get_root().get_node("World/CanvasModulate")
 
 @export var spawn_locations: Array[Vector2] = []
+@export var current_enemies: Array[Enemy] = []
 
 var spawn_cooldown: float = 0.0
 var spawn_cooldown_min: float = 0.5
@@ -24,6 +26,18 @@ func spawn_enemy(enemy_data: EnemyData, pos: Vector2):
 	enemy.global_position = pos
 	enemy.data = enemy_data
 	get_tree().get_root().get_node("World").add_child(enemy)
+	add_enemy_to_array(enemy)
+
+func add_enemy_to_array(enemy: Enemy):
+	current_enemies.append(enemy)
+
+func remove_enemy(enemy):
+	var index = current_enemies.find(enemy)
+	if (index != -1):
+		current_enemies.remove_at(index)
+	
+	if enemy:
+		enemy.queue_free() # just for safety (might remove later)
 
 func _process(delta: float) -> void:
 	data.seconds_elapsed += delta # TEMPORARY

@@ -6,4 +6,7 @@ class_name ItemFrame
 #@onready var quantity_label = $Label
 
 func _ready():
-	$Label.text = str(item_quantity)
+	if item_quantity <= 1:
+		$Label.text = ""
+	else:
+		$Label.text = str(item_quantity)

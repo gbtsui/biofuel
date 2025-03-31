@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://dtls1fe8poqma"]
+[gd_scene load_steps=23 format=4 uid="uid://dg7gln531a4yo"]
 
 [ext_resource type="Script" path="res://scripts/helper/world.gd" id="1_1dtt6"]
 [ext_resource type="PackedScene" uid="uid://b1f0yvqffglf3" path="res://scenes/player.tscn" id="1_v2x1v"]
@@ -8,8 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://cunjitgu5n442" path="res://scenes/home/interactables/crafting_bench.tscn" id="8_en705"]
 [ext_resource type="PackedScene" uid="uid://eg8tbf8uata6" path="res://scenes/enemies/spawn_point.tscn" id="9_tflit"]
 [ext_resource type="PackedScene" uid="uid://bvcgjhxm7wv5f" path="res://scenes/items/weapons/melee/hoe.tscn" id="10_uroo0"]
+[ext_resource type="PackedScene" uid="uid://bjh68np1jmvpo" path="res://scenes/items/seeds/seed.tscn" id="11_7qphp"]
+[ext_resource type="PackedScene" uid="uid://dwyrjghsyar6c" path="res://scenes/enemies/blank_aphid.tscn" id="12_8orx7"]
+[ext_resource type="Script" path="res://scripts/helper/save_this_wrld/seed_data.gd" id="12_380nc"]
 [ext_resource type="Script" path="res://scripts/helper/target_controller.gd" id="12_iu1hs"]
 [ext_resource type="PackedScene" uid="uid://ckmvmup0ryy8p" path="res://scenes/home/interactables/upgrade_station.tscn" id="12_qxhn3"]
+[ext_resource type="PackedScene" uid="uid://e7b0co5hygvv" path="res://scenes/items/weapons/melee/scythe.tscn" id="13_qtvjl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q1w2m"]
 texture = ExtResource("2_a58vc")
@@ -66,6 +70,28 @@ normal = Vector2(-0.999873, 0.015942)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hcfnj"]
 normal = Vector2(0, 1)
+
+[sub_resource type="Resource" id="Resource_cdyug"]
+script = ExtResource("12_380nc")
+deceleration = 300.0
+initial_speed = 500.0
+growth_time = 5.0
+crop_name = "potato"
+yield_min = 3
+yield_max = 7
+seed_texture_path = ""
+seed_hp = 50.0
+seed_mode = 0
+mode = 0
+rotatable = true
+offset = 200.0
+item_name = "potato_seed"
+amount_in_stack = 20
+stackable = true
+item_texture_path = "res://assets/sprites/unsorted/seed_packet.png"
+xp_upgrade_values = {}
+item_global_position = Vector2(0, 0)
+item_type = 0
 
 [node name="World" type="Node2D"]
 scale = Vector2(1.02042, 1)
@@ -124,6 +150,21 @@ position = Vector2(-5624.16, -3621)
 [node name="SpawnPoint4" parent="." instance=ExtResource("9_tflit")]
 position = Vector2(7498.87, -3642)
 
+[node name="BlankAphid" parent="." instance=ExtResource("12_8orx7")]
+position = Vector2(-4147.31, 2915)
+
+[node name="BlankAphid2" parent="." instance=ExtResource("12_8orx7")]
+position = Vector2(-4089.49, 3428)
+
+[node name="BlankAphid3" parent="." instance=ExtResource("12_8orx7")]
+position = Vector2(-4890.14, 3321)
+
+[node name="Seed" parent="." instance=ExtResource("11_7qphp")]
+position = Vector2(-259.697, 294)
+data = SubResource("Resource_cdyug")
+
 [node name="Hoe" parent="." instance=ExtResource("10_uroo0")]
-position = Vector2(-121.519, 236)
-right_held_down = false
+position = Vector2(-339.076, 33)
+
+[node name="Scythe" parent="." instance=ExtResource("13_qtvjl")]
+position = Vector2(-684.032, 112)

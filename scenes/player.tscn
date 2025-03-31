@@ -96,6 +96,7 @@ size_flags_horizontal = 4
 
 [node name="PauseUi" parent="UiLayer" instance=ExtResource("4_gl3te")]
 visible = false
+theme = null
 
 [node name="OpenDebug" type="Button" parent="UiLayer"]
 visible = false

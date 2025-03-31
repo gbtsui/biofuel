@@ -80,9 +80,6 @@ text = "spawn that jawn"
 layout_mode = 2
 text = "kill everything"
 
-[node name="Label" parent="." index="3"]
-text = "debugging, are we?"
-
 [connection signal="pressed" from="TabContainer/Items/CraftingMaterialCreator/Button" to="TabContainer/Items" method="_spawn_item"]
 [connection signal="pressed" from="TabContainer/Enemies/VBoxContainer/Button" to="TabContainer/Enemies" method="_spawn_enemy"]
 [connection signal="pressed" from="TabContainer/Enemies/Button" to="TabContainer/Enemies" method="_kill_all_enemies"]

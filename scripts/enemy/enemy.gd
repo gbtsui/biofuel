@@ -8,7 +8,8 @@ class_name Enemy
 		return data
 
 
-@export var target_distance_threshold = 100
+@export var target_distance_threshold = 100 # TODO: move this into data btw
+@export var plot_distance_threshold = 50
 
 @export var selfEffect := Bullet.BULLET_EFFECT.NORMAL
 @export var effect_damage: float = 0
@@ -48,6 +49,7 @@ enum PATHFIND_TYPE {
 func die() -> void:
 	#handle item drop stuff here ig???
 	modulate = Color("1f1e33")
+	get_tree().get_root().get_node("World/GameController").remove_enemy(self)
 	queue_free()
 	
 
@@ -80,10 +82,12 @@ func find_target():
 			#$DebugLabel2.text = str(weighted_tar_dist) + " : " + str(weighted_player_dist)
 			current_target = player if weighted_player_dist < weighted_tar_dist else plot_target
 	
-	if self.global_position.distance_to(current_target.global_position) < target_distance_threshold:
+	if self.global_position.distance_to(current_target.global_position) < target_distance_threshold and current_target == player:
 		current_target = null
 		return
-
+	elif self.global_position.distance_to(current_target.global_position) < plot_distance_threshold and current_target is TilledDirt:
+		current_target = null
+		return
 func _ready() -> void:
 	#find_target()
 	self.add_child(steering_agent)
@@ -149,6 +153,9 @@ func _process(delta: float) -> void:
 	#$Label.text = str(hp)
 
 func handle_walk_animation(delta: float):
+	if knockback_vector:
+		return
+	
 	if velocity.normalized().x >= 0:
 		$SpriteContainer.scale = Vector2(-1, 1)
 	elif velocity.normalized().x <= 0:
@@ -176,12 +183,12 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 		body.damage(data.attack_damage)
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	#if area is TilledDirt:
-	#	area.damage(data.plot_attack_damage)
+	if area is TilledDirt:
+		area.damage(data.plot_attack_damage)
 	pass
 	
 func knockback(direction: Vector2, magnitude: float):
 	#committing crimes with direction and magnitude, OH YEAH
 	knockback_vector = (direction * magnitude)/data.weight
-	$DebugLabel2.text = str(magnitude)
+	#w$DebugLabel2.text = str(magnitude)
 	pass

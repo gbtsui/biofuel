@@ -1,7 +1,7 @@
-extends Node
+extends Resource
 class_name XPModifier
 
-static func get_scalar(xp_type, xp_amount):
+static func get_scalar(xp_type, xp_amount) -> float:
 	match xp_type:
 		"knockback_magnitude":
 			return 1 + (floor(sqrt(xp_amount / 10)) / 10)

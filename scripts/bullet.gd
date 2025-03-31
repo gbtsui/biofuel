@@ -14,7 +14,8 @@ enum BULLET_EFFECT {
 	FIRE,
 	CORROSION,
 	SLOW,
-	FREEZE
+	FREEZE,
+	STUN
 }
 
 func setVelocity():
