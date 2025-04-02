@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="MeleeWeaponData" load_steps=2 format=3 uid="uid://b6c8autc6hivk"]
+
+[ext_resource type="Script" path="res://scripts/helper/save_this_wrld/melee_weapon_data.gd" id="1_3f4e7"]
+
+[resource]
+script = ExtResource("1_3f4e7")
+xp = {
+"attack_speed_xp": 0,
+"damage_xp": 0,
+"elemental_damage_duration_xp": 0,
+"elemental_damage_xp": 0,
+"knockback_magnitude_xp": 0
+}
+weapon_scene_path = "res://scenes/items/weapons/melee/messer.tscn"
+damage = 20.0
+attack_speed = 0.5
+knockback_magnitude = 300.0
+elemental_damage_type = 0
+elemental_damage = 0.0
+elemental_damage_duration = 0.0
+mode = 0
+rotatable = true
+offset = 0.0
+item_name = "messer"
+amount_in_stack = 1
+stackable = false
+item_texture_path = "res://assets/sprites/weapons/messer.png"
+xp_upgrade_values = {}
+item_global_position = Vector2(0, 0)
+item_type = 0

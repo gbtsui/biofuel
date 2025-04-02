@@ -1,0 +1,128 @@
+[gd_scene load_steps=9 format=3 uid="uid://d0wk30mn31cqm"]
+
+[ext_resource type="PackedScene" uid="uid://c2p2plr1c1v1c" path="res://scenes/items/weapons/melee/melee_weapon.tscn" id="1_ot1dd"]
+[ext_resource type="Script" path="res://scripts/helper/save_this_wrld/melee_weapon_data.gd" id="2_6koef"]
+[ext_resource type="Texture2D" uid="uid://d0ftlheplqjqa" path="res://assets/sprites/weapons/leek_sabre.png" id="2_faveb"]
+
+[sub_resource type="Resource" id="Resource_rcllt"]
+script = ExtResource("2_6koef")
+xp = {
+"attack_speed_xp": 0,
+"damage_xp": 0,
+"elemental_damage_duration_xp": 0,
+"elemental_damage_xp": 0,
+"knockback_magnitude_xp": 0
+}
+weapon_scene_path = "res://scenes/items/weapons/melee/leek_sabre.tscn"
+damage = 25.0
+attack_speed = 0.6
+knockback_magnitude = 300.0
+elemental_damage_type = 0
+elemental_damage = 0.0
+elemental_damage_duration = 0.0
+mode = 0
+rotatable = true
+offset = 25.0
+item_name = "leek_sabre"
+amount_in_stack = 1
+stackable = false
+item_texture_path = "res://assets/sprites/weapons/leek_sabre.png"
+xp_upgrade_values = {}
+item_global_position = Vector2(0, 0)
+item_type = 0
+
+[sub_resource type="Animation" id="Animation_61g6h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/PointyThing/Hurtbox/HurtboxCollision:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_owt31"]
+resource_name = "attack"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/PointyThing/Hurtbox/HurtboxCollision:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-41, 10), Vector2(117, -11), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f1ep8"]
+_data = {
+"RESET": SubResource("Animation_61g6h"),
+"attack": SubResource("Animation_owt31")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_owl3g"]
+size = Vector2(171, 20)
+
+[node name="LeekSabre" instance=ExtResource("1_ot1dd")]
+data = SubResource("Resource_rcllt")
+
+[node name="ItemSprite" parent="." index="1"]
+visible = false
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_faveb")
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_f1ep8")
+}
+
+[node name="HurtboxCollision" parent="Pivot/PointyThing/Hurtbox" index="0"]
+position = Vector2(110, 20)
+rotation = -0.110741
+shape = SubResource("RectangleShape2D_owl3g")
+disabled = true
+
+[node name="WeaponSprite" parent="Pivot/PointyThing" index="1"]
+visible = true
+position = Vector2(-41, 41)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_faveb")
+offset = Vector2(142.667, -22.6667)
+
+[node name="Label" type="Label" parent="." index="5"]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "okay, i know this technically isn't a sabre. by definition sabres are curved backswords usually for cavalry or sometimes for infantry. this is more accurately a rapier since it's a thrusting weapon. i got inspired by sirfetch'd from pokemon and also hatsune miku. just let me be, ok?"

@@ -19,6 +19,7 @@ func _ready():
 	else:
 		$SeedSprite.visible = false
 
+
 func fire():
 	var seed_instance = SeedDatabase.append_seed_data(seed_scene.instantiate(), self.data.crop_name)
 	seed_instance.data.seed_mode = SEED_MODE.FIRING

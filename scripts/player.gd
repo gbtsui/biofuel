@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-@onready var inventory: Node = get_node("Inventory")
+@onready var inventory: Inventory = get_node("Inventory")
 @onready var inventory_ui: Control = get_node("UiLayer/InventoryUi")
 
 @export var stats: PlayerStats = null:

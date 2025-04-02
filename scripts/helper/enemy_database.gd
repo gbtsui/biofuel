@@ -15,6 +15,7 @@ enum ENEMY_TYPES {
 	BOSS
 }
 
+# refactor this later smh
 const ENEMIES: Dictionary = {
 	"blank_aphid": {
 		"enemy_scene_path":"res://scenes/enemies/blank_aphid.tscn",
@@ -31,6 +32,22 @@ const ENEMIES: Dictionary = {
 		
 		"attack_damage":5.0,
 		"plot_attack_damage": 10.0
+	},
+	"blank_ant":{
+		"enemy_scene_path":"res://scenes/enemies/blank_ant.tscn",
+		"enemy_scene":preload("res://scenes/enemies/blank_ant.tscn"),
+		"enemy_type": ENEMY_TYPES.NORMAL,
+		
+		"max_hp": 100,
+		"baseSpeed": 175,
+		
+		"weight": 1.5,
+		
+		"player_target_weight": 1,
+		"plot_target_weight": 0.2,
+		
+		"attack_damage": 15.0,
+		"plot_attack_damage": 2.0
 	}
 }
 

@@ -2,7 +2,7 @@ extends Node
 class_name GameController
 
 @onready var player = get_tree().get_root().get_node("World/Player")
-@onready var death_ui = preload("res://scenes/ui/death_ui.tscn")
+@onready var death_ui = preload("res://scenes/ui/new_death_ui.tscn")
 
 @export var data: WorldData
 @onready var world_modulate: CanvasModulate = get_tree().get_root().get_node("World/CanvasModulate")
@@ -21,10 +21,18 @@ func spawn_wave(day_number: int):
 		for i in range(wave_data[enemy]):
 			data.spawn_queue.append(enemy_data)
 
+func spawn_random(day_number: int):
+	var data = WaveDatabase.get_between_waves(day_number)
+	for enemy in data.keys():
+		var enemy_data = EnemyDatabase.get_enemy_data(enemy)
+		for i in range(data[enemy]):
+			data.spawn_queue.append(enemy_data)
+
 func spawn_enemy(enemy_data: EnemyData, pos: Vector2):
 	var enemy: Enemy = enemy_data.enemy_scene.instantiate()
 	enemy.global_position = pos
 	enemy.data = enemy_data
+	enemy.data.hp = enemy.data.max_hp
 	get_tree().get_root().get_node("World").add_child(enemy)
 	add_enemy_to_array(enemy)
 
@@ -53,7 +61,11 @@ func _process(delta: float) -> void:
 	if data.spawn_queue.size() > 0 and spawn_cooldown <= 0:
 		var location = spawn_locations.pick_random()
 		spawn_enemy(data.spawn_queue[0], location)
+		data.spawn_queue.remove_at(0)
 		spawn_cooldown = randf_range(spawn_cooldown_min, spawn_cooldown_max)
+	
+	if randf() < 0.001:
+		spawn_random(data.current_day)
 
 func _ready():
 	player.player_died.connect(end_game)
@@ -73,6 +85,5 @@ func quit_game():
 func end_game():
 	var death_ui_instance = death_ui.instantiate()
 	player.get_node("UiLayer").add_child(death_ui_instance)
-	while true:
-		Engine.time_scale = move_toward(Engine.time_scale, 0, 0.05)
-		await get_tree().create_timer(0.1).timeout
+	SaveGame.delete_save("placeholder path")
+	get_tree().paused = true

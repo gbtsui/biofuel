@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5glb5bwftua5"]
+
+[ext_resource type="PackedScene" uid="uid://5dfg3lg3hgu2" path="res://scenes/ui/interactable_ui.tscn" id="1_v3fvi"]
+[ext_resource type="Script" path="res://scripts/ui/new_death_ui.gd" id="2_5q3vf"]
+[ext_resource type="Texture2D" uid="uid://0flvqqsdw417" path="res://assets/sprites/ui/exit.png" id="2_vqueu"]
+[ext_resource type="Texture2D" uid="uid://48cmpwxjvyao" path="res://assets/sprites/ui/temp/caveira-skull.png" id="3_bf34n"]
+
+[node name="InteractableUi" instance=ExtResource("1_v3fvi")]
+process_mode = 2
+script = ExtResource("2_5q3vf")
+
+[node name="PanelContainer" parent="." index="0"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Button" type="Button" parent="PanelContainer" index="0"]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 384.0
+offset_right = 646.0
+offset_bottom = 580.0
+icon = ExtResource("2_vqueu")
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer" index="1"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 112.0
+offset_right = 936.0
+offset_bottom = 272.0
+texture = ExtResource("3_bf34n")
+expand_mode = 1
+
+[node name="CloseButton" parent="." index="1"]
+visible = false
+
+[connection signal="pressed" from="PanelContainer/Button" to="." method="_on_exit"]

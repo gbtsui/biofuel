@@ -3,7 +3,7 @@ class_name ItemData
 
 @export var mode = Item.MODE.GROUND_ITEM
 @export var rotatable = true
-@export var offset: float = 200
+@export var offset: float = 50
 @export var item_name: String = "default_item"
 @export var amount_in_stack: int = 1
 @export var stackable = false

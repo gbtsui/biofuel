@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/helper/save_this_wrld/melee_weapon_data.gd" id="3_hrhro"]
 [ext_resource type="Texture2D" uid="uid://dd3gh4rlg80iv" path="res://assets/sprites/weapons/scythe.png" id="3_iv3r8"]
 
-[sub_resource type="Resource" id="Resource_2u68a"]
+[sub_resource type="Resource" id="Resource_xvd7p"]
 script = ExtResource("3_hrhro")
 xp = {
 "attack_speed_xp": 0,
@@ -121,7 +121,7 @@ size = Vector2(117.738, 87.1675)
 
 [node name="Scythe" instance=ExtResource("1_ny55e")]
 script = ExtResource("2_cxitw")
-data = SubResource("Resource_2u68a")
+data = SubResource("Resource_xvd7p")
 
 [node name="AnimationPlayer" parent="." index="2"]
 libraries = {

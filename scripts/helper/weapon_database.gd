@@ -35,8 +35,7 @@ const WEAPONS := {
 			"elemental_damage_type":Bullet.BULLET_EFFECT.NORMAL
 		}
 	},
-	
-	"potato cannon":{
+	"potato_cannon":{
 		"type": WEAPON_TYPES.RANGED,
 		"item_path":"res://scenes/items/weapons/ranged/potato_cannon.tscn",
 		"item_texture_path":"res://assets/sprites/weapons/potato_cannon.png",
@@ -50,6 +49,20 @@ const WEAPONS := {
 			"elemental_damage_duration":2.5,
 			"elemental_damage_type":Bullet.BULLET_EFFECT.FIRE
 		}
+	},
+	"leek_sabre":{
+		"type": WEAPON_TYPES.MELEE,
+		"item_path":"res://scenes/items/weapons/melee/leek_sabre",
+		"item_texture_path":"res://assets/sprites/weapons/leek_sabre.png",
+		"offset":25,
+		"data":{
+			"damage":25,
+			"attack_speed":0.6,
+			"knockback_magnitude":300,
+			"elemental_damage": 0,
+			"elemental_damage_duration": 0,
+			"elemental_damage_type": Bullet.BULLET_EFFECT.NORMAL
+		}
 	}
 }
 # TODO: do i want an elemental damage manager?? hmmmmm it would be pretty interesting ngl and not too complex
@@ -58,8 +71,8 @@ static func load_weapon(name: String):
 	var data = load_weapon(name)
 	var weapon_instance = load(data.item_path).instantiate()
 	
-	weapon_instance.data = data
-	print(str(data))
+	#weapon_instance.data = data
+	#print(str(data))
 	return weapon_instance
 
 static func get_weapon_data(name: String):
@@ -70,7 +83,6 @@ static func get_weapon_data(name: String):
 		data = MeleeWeaponData.new()
 	elif weapon_data.type == WEAPON_TYPES.RANGED:
 		data = RangedWeaponData.new()
-		pass # TODO: add later cyka
 	
 	data.damage = weapon_data.data.damage
 	data.attack_speed = weapon_data.data.attack_speed

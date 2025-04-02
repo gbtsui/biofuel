@@ -4,14 +4,6 @@ class_name MeleeWeapon
 @onready var hurtbox = $Pivot/PointyThing/Hurtbox
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-func set_melee_weapon_stats():
-	var new_data = MeleeWeaponData.new()
-	
-
-func add_xp(added_xp: Dictionary, multiplier: int):
-	for entry in added_xp:
-		data.xp[entry] += added_xp[entry] * multiplier
-
 func _ready():
 	$Pivot/PointyThing/Hurtbox/HurtboxCollision.disabled = true
 	

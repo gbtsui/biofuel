@@ -19,3 +19,7 @@ func _process(delta: float) -> void:
 
 func _on_cooldown_timer_timeout() -> void:
 	fireable = true
+
+func add_xp(added_xp: Dictionary, multiplier: int):
+	for entry in added_xp:
+		data.xp[entry] += added_xp[entry] * multiplier

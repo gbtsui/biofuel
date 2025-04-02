@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5hgkpup5c0cq"]
+
+[ext_resource type="Script" path="res://scripts/ui/components/stat_display.gd" id="1_7sh08"]
+[ext_resource type="Texture2D" uid="uid://b6ysitg3f4rja" path="res://assets/sprites/ui/upgrade_icons/attack_speed.png" id="1_kbkyd"]
+
+[node name="StatDisplay" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+offset_right = 5.0
+offset_bottom = 23.0
+script = ExtResource("1_7sh08")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_kbkyd")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "0"

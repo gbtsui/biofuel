@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://b2kyhgntp7ubg" path="res://assets/sprites/weapons/potato_cannon.png" id="2_ehpst"]
 [ext_resource type="Script" path="res://scripts/helper/save_this_wrld/ranged_weapon_data.gd" id="2_up1ee"]
 
-[sub_resource type="Resource" id="Resource_p3kkn"]
+[sub_resource type="Resource" id="Resource_dv232"]
 script = ExtResource("2_up1ee")
 bullet_scene_path = ""
-projectile_count = 0
+projectile_count = 1
 bullet_scale = 1.0
 pierce = 1
 explosion_scale = 1.0
@@ -31,8 +31,8 @@ elemental_damage = 0.0
 elemental_damage_duration = 1.0
 mode = 0
 rotatable = true
-offset = 200.0
-item_name = "default_item"
+offset = 50.0
+item_name = "potato_cannon"
 amount_in_stack = 1
 stackable = false
 item_texture_path = ""
@@ -150,7 +150,7 @@ hue_variation_min = -0.02
 hue_variation_max = 0.02
 
 [node name="Weapon" instance=ExtResource("1_yxuu5")]
-data = SubResource("Resource_p3kkn")
+data = SubResource("Resource_dv232")
 
 [node name="ItemSprite" parent="." index="1"]
 visible = false

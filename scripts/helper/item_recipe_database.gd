@@ -2,12 +2,19 @@ extends Resource
 class_name ItemRecipeDatabase
 
 const ITEM_RECIPES := {
-	"potato cannon":{
-		"item_name":"potato cannon",
+	"potato_cannon":{
 		"item_path":"res://scenes/items/weapons/ranged/potato_cannon.tscn",
-		"item_texture":"res://assets/sprites/weapons/test/TEST_potato_cannon.png",
+		"item_texture":"res://assets/sprites/weapons/potato_cannon.png",
 		"recipe":{
-			"potato": 12
+			"potato": 25
+		},
+		"accessible":true
+	},
+	"leek_sabre":{
+		"item_path":"res://scenes/items/weapons/melee/leek_sabre.tscn",
+		"item_texture":"res://assets/sprites/weapons/leek_sabre.png",
+		"recipe":{
+			"leek": 15
 		},
 		"accessible":true
 	},
@@ -28,7 +35,7 @@ static func create_item_recipe(item_name: String) -> ItemRecipe:
 		if recipe_data.accessible == false:
 			return null
 		var new_recipe = ItemRecipe.new()
-		new_recipe.item_name = recipe_data.item_name
+		new_recipe.item_name = item_name
 		new_recipe.item_path = recipe_data.item_path
 		#var texture = Texture2D.new()
 		#texture.resource_path = recipe_data.item_texture

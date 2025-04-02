@@ -1,0 +1,148 @@
+[gd_scene load_steps=9 format=3 uid="uid://cnvnjn56yn2aw"]
+
+[ext_resource type="PackedScene" uid="uid://c2p2plr1c1v1c" path="res://scenes/items/weapons/melee/melee_weapon.tscn" id="1_25tol"]
+[ext_resource type="Texture2D" uid="uid://d2yqp6oovoulh" path="res://assets/sprites/weapons/messer.png" id="2_u430f"]
+[ext_resource type="Script" path="res://scripts/helper/save_this_wrld/melee_weapon_data.gd" id="2_xkb6a"]
+
+[sub_resource type="Resource" id="Resource_lpt14"]
+script = ExtResource("2_xkb6a")
+xp = {
+"attack_speed_xp": 0,
+"damage_xp": 0,
+"elemental_damage_duration_xp": 0,
+"elemental_damage_xp": 0,
+"knockback_magnitude_xp": 0
+}
+weapon_scene_path = "res://scenes/items/weapons/melee/messer.tscn"
+damage = 20.0
+attack_speed = 0.5
+knockback_magnitude = 300.0
+elemental_damage_type = 0
+elemental_damage = 0.0
+elemental_damage_duration = 0.0
+mode = 0
+rotatable = true
+offset = 0.0
+item_name = "messer"
+amount_in_stack = 1
+stackable = false
+item_texture_path = "res://assets/sprites/weapons/messer.png"
+xp_upgrade_values = {}
+item_global_position = Vector2(0, 0)
+item_type = 0
+
+[sub_resource type="Animation" id="Animation_7yi3x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/PointyThing/Hurtbox/HurtboxCollision:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/PointyThing:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_x7hf8"]
+resource_name = "attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.5708, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/PointyThing/Hurtbox/HurtboxCollision:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/PointyThing:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0472, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5hk55"]
+_data = {
+"RESET": SubResource("Animation_7yi3x"),
+"attack": SubResource("Animation_x7hf8")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x8ulx"]
+size = Vector2(42.9339, 150.385)
+
+[node name="Messer" instance=ExtResource("1_25tol")]
+data = SubResource("Resource_lpt14")
+
+[node name="ItemSprite" parent="." index="1"]
+visible = false
+texture = ExtResource("2_u430f")
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_5hk55")
+}
+
+[node name="Hurtbox" parent="Pivot/PointyThing" index="0"]
+position = Vector2(-33, 0.389999)
+
+[node name="HurtboxCollision" parent="Pivot/PointyThing/Hurtbox" index="0"]
+position = Vector2(105.871, -84.769)
+rotation = 0.464082
+shape = SubResource("RectangleShape2D_x8ulx")
+disabled = true
+
+[node name="WeaponSprite" parent="Pivot/PointyThing" index="1"]
+visible = true
+position = Vector2(26, -0.610001)
+scale = Vector2(0.75, 0.74)
+texture = ExtResource("2_u430f")
+offset = Vector2(41, -81)

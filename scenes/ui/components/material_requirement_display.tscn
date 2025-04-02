@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bto0uwewce2x5"]
+
+[ext_resource type="Script" path="res://scripts/ui/components/material_requirement_display.gd" id="1_nap67"]
+[ext_resource type="Texture2D" uid="uid://b2iaxoogcxdyf" path="res://assets/sprites/plants/carrot.png" id="1_v7ylg"]
+
+[node name="MaterialRequirementDisplay" type="HBoxContainer"]
+offset_right = 80.0
+offset_bottom = 40.0
+script = ExtResource("1_nap67")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("1_v7ylg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NeededLabel" type="Label" parent="."]
+layout_mode = 2
+text = "0"
+
+[node name="OwnedLabel" type="Label" parent="."]
+layout_mode = 2
+text = "(0)"

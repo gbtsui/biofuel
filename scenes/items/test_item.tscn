@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cujlilp2sxnmo"]
 
 [ext_resource type="PackedScene" uid="uid://dfhfi6iqprhku" path="res://scenes/items/item.tscn" id="1_sr6vc"]
-[ext_resource type="Texture2D" uid="uid://r4d6vww4n6u6" path="res://icon.svg" id="2_8h338"]
+[ext_resource type="Texture2D" uid="uid://dy5r0bxolt2vo" path="res://icon.svg" id="2_8h338"]
 
 [node name="Item" instance=ExtResource("1_sr6vc")]
 

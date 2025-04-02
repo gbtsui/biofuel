@@ -3,6 +3,7 @@ class_name TilledDirt
 
 @onready var planting_timer = $PlantingTimer
 @onready var crop_scene = preload("res://scenes/items/crops/crop.tscn")
+@onready var seed_scene = preload("res://scenes/items/seeds/seed.tscn")
 @onready var target_controller = get_tree().get_root().get_node("World/TargetController")
 #@export var current_plant: Plant = null
 #@export var current_crop: Crop = null
@@ -44,10 +45,20 @@ func harvest() -> void:
 			crop_instance.global_position = self.global_position + Vector2(randi_range(-30, 30), randi_range(-30, 30)) #replace with an actual animation/tween later
 			crop_instance.visible = true
 			get_tree().get_root().get_node("World").add_child(crop_instance)
+		
+		var seed_yield_num = randi_range(data.seed_drop_min, data.seed_drop_max) * (1 if randf() < data.seed_drop_chance else 0)
+		for seed in seed_yield_num:
+			var seed_instance = SeedDatabase.append_seed_data(seed_scene.instantiate(), data.current_crop)
+			
+			seed_instance.global_position =  self.global_position + Vector2(randi_range(-30, 30), randi_range(-30, 30)) #replace with an actual animation/tween later
+			seed_instance.visible = true
+			get_tree().get_root().get_node("World").add_child(seed_instance)
 		data.harvestable = false
 		#current_crop = null
 		data.current_crop = ""
 		target_controller.remove_target(self)
+	
+	update_sprites()
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -62,6 +73,9 @@ func _on_body_entered(body: Node2D) -> void:
 		data.yield_max = current_seed.data.yield_max
 		#crop_scene = current_seed.crop_scene
 		data.crop_hp = current_seed.data.seed_hp
+		data.seed_drop_chance = current_seed.data.seed_drop_chance
+		data.seed_drop_min = current_seed.data.seed_drop_min
+		data.seed_drop_max = current_seed.data.seed_drop_max
 		$PlantingTimer.wait_time = current_seed.data.growth_time
 		
 		current_seed.queue_free()
@@ -83,4 +97,4 @@ func damage(dmg: float):
 func _on_planting_timer_timeout() -> void:
 	data.harvestable = true
 	update_sprites()
-	# get a thingy to set label or sprite not just when planting timer is timed out lol ??? not rn tho
+# TODO: change to variable

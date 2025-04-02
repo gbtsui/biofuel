@@ -16,3 +16,33 @@ class_name EnemyData
 @export var plot_target_weight:float = 1
 @export var attack_damage: float = 5.0
 @export var plot_attack_damage: float = 10.0
+
+@export var drops: Dictionary = {
+	"seeds": {
+		"potato":{
+			"chance":0.2,
+			"min":1,
+			"max":2
+		},
+		"carrot":{
+			"chance":0.1,
+			"min":1,
+			"max":2
+		},
+		"beetroot":{
+			"chance":0.1,
+			"min":1,
+			"max":2
+		},
+		"leek":{
+			"chance":0.1,
+			"min":1,
+			"max":2
+		},
+		"sugarcane":{
+			"chance":0.02,
+			"min":1,
+			"max":2
+		},
+	}
+}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://dg7gln531a4yo"]
+[gd_scene load_steps=25 format=4 uid="uid://dg7gln531a4yo"]
 
 [ext_resource type="Script" path="res://scripts/helper/world.gd" id="1_1dtt6"]
 [ext_resource type="PackedScene" uid="uid://b1f0yvqffglf3" path="res://scenes/player.tscn" id="1_v2x1v"]
@@ -9,11 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://eg8tbf8uata6" path="res://scenes/enemies/spawn_point.tscn" id="9_tflit"]
 [ext_resource type="PackedScene" uid="uid://bvcgjhxm7wv5f" path="res://scenes/items/weapons/melee/hoe.tscn" id="10_uroo0"]
 [ext_resource type="PackedScene" uid="uid://bjh68np1jmvpo" path="res://scenes/items/seeds/seed.tscn" id="11_7qphp"]
-[ext_resource type="PackedScene" uid="uid://dwyrjghsyar6c" path="res://scenes/enemies/blank_aphid.tscn" id="12_8orx7"]
 [ext_resource type="Script" path="res://scripts/helper/save_this_wrld/seed_data.gd" id="12_380nc"]
 [ext_resource type="Script" path="res://scripts/helper/target_controller.gd" id="12_iu1hs"]
 [ext_resource type="PackedScene" uid="uid://ckmvmup0ryy8p" path="res://scenes/home/interactables/upgrade_station.tscn" id="12_qxhn3"]
 [ext_resource type="PackedScene" uid="uid://e7b0co5hygvv" path="res://scenes/items/weapons/melee/scythe.tscn" id="13_qtvjl"]
+[ext_resource type="PackedScene" uid="uid://xb0r7pi6wf17" path="res://scenes/enemies/blank_ant.tscn" id="14_ecg6u"]
+[ext_resource type="PackedScene" uid="uid://cnvnjn56yn2aw" path="res://scenes/items/weapons/melee/messer.tscn" id="15_q5u5c"]
+[ext_resource type="PackedScene" uid="uid://d0wk30mn31cqm" path="res://scenes/items/weapons/melee/leek_sabre.tscn" id="16_ngk30"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q1w2m"]
 texture = ExtResource("2_a58vc")
@@ -79,12 +81,15 @@ growth_time = 5.0
 crop_name = "potato"
 yield_min = 3
 yield_max = 7
+seed_drop_chance = 0.9
+seed_drop_min = 0
+seed_drop_max = 2
 seed_texture_path = ""
 seed_hp = 50.0
 seed_mode = 0
 mode = 0
 rotatable = true
-offset = 200.0
+offset = 50.0
 item_name = "potato_seed"
 amount_in_stack = 20
 stackable = true
@@ -150,15 +155,6 @@ position = Vector2(-5624.16, -3621)
 [node name="SpawnPoint4" parent="." instance=ExtResource("9_tflit")]
 position = Vector2(7498.87, -3642)
 
-[node name="BlankAphid" parent="." instance=ExtResource("12_8orx7")]
-position = Vector2(-4147.31, 2915)
-
-[node name="BlankAphid2" parent="." instance=ExtResource("12_8orx7")]
-position = Vector2(-4089.49, 3428)
-
-[node name="BlankAphid3" parent="." instance=ExtResource("12_8orx7")]
-position = Vector2(-4890.14, 3321)
-
 [node name="Seed" parent="." instance=ExtResource("11_7qphp")]
 position = Vector2(-259.697, 294)
 data = SubResource("Resource_cdyug")
@@ -168,3 +164,12 @@ position = Vector2(-339.076, 33)
 
 [node name="Scythe" parent="." instance=ExtResource("13_qtvjl")]
 position = Vector2(-684.032, 112)
+
+[node name="Enemy" parent="." instance=ExtResource("14_ecg6u")]
+position = Vector2(-372.396, 529)
+
+[node name="MeleeWeapon" parent="." instance=ExtResource("15_q5u5c")]
+position = Vector2(-43.1195, 328)
+
+[node name="LeekSabre" parent="." instance=ExtResource("16_ngk30")]
+position = Vector2(191.098, 250)

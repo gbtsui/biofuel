@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bnq7mg4pc5grm" path="res://assets/sprites/weapons/hoe.png" id="3_tl0qe"]
 [ext_resource type="Texture2D" uid="uid://c5ttqsvyhfvcv" path="res://assets/sprites/environment/tilled_dirt.png" id="5_r0cai"]
 
-[sub_resource type="Resource" id="Resource_h2l4q"]
+[sub_resource type="Resource" id="Resource_bamff"]
 script = ExtResource("3_i2fvd")
 xp = {
 "attack_speed_xp": 0,
@@ -126,7 +126,7 @@ size = Vector2(96, 96)
 [node name="Hoe" instance=ExtResource("1_51l0f")]
 script = ExtResource("2_kd036")
 right_held_down = false
-data = SubResource("Resource_h2l4q")
+data = SubResource("Resource_bamff")
 
 [node name="ItemSprite" parent="." index="1"]
 visible = false

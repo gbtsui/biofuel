@@ -48,6 +48,16 @@ enum PATHFIND_TYPE {
 
 func die() -> void:
 	#handle item drop stuff here ig???
+	for drop in data.drops.keys():
+		var seed_drops = data.drops.seeds
+		for seed in seed_drops.keys():
+			if randf() < seed_drops[seed]["chance"]:
+				for instance in randi_range(seed_drops[seed]["min"], seed_drops[seed]["max"]):
+					var new_instance = SeedDatabase.get_seed(seed)
+					new_instance.global_position = self.global_position
+					get_tree().get_root().get_node("World").add_child(new_instance)
+				break
+	
 	modulate = Color("1f1e33")
 	get_tree().get_root().get_node("World/GameController").remove_enemy(self)
 	queue_free()

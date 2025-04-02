@@ -17,6 +17,9 @@ func write_savegame() -> void:
 static func save_exists() -> bool:
 	return ResourceLoader.exists(SAVE_PATH)
 
+static func delete_save(_path):
+	DirAccess.remove_absolute(SAVE_PATH)
+
 static func load_savegame() -> Resource:
 	if not ResourceLoader.has_cached(SAVE_PATH):
 		return ResourceLoader.load(SAVE_PATH, "")

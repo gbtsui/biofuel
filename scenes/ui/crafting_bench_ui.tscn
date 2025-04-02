@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://c06g68gwpjmdn"]
+[gd_scene load_steps=7 format=3 uid="uid://c06g68gwpjmdn"]
 
 [ext_resource type="PackedScene" uid="uid://5dfg3lg3hgu2" path="res://scenes/ui/interactable_ui.tscn" id="1_3bv65"]
 [ext_resource type="Script" path="res://scripts/ui/crafting_bench_ui.gd" id="2_wsif3"]
 [ext_resource type="Script" path="res://scripts/items/item_recipe.gd" id="3_tuxvh"]
+[ext_resource type="Texture2D" uid="uid://7me2jbrht5kd" path="res://assets/sprites/stefan_vulic.jpg" id="4_w61aj"]
+[ext_resource type="Texture2D" uid="uid://do5jftrmvfjr7" path="res://assets/sprites/ui/checkmark.png" id="5_ykn7l"]
+[ext_resource type="Texture2D" uid="uid://bqbqljbw2lso2" path="res://assets/sprites/ui/hud/ninepatch.png" id="6_sinqk"]
 
 [node name="InteractableUi" instance=ExtResource("1_3bv65")]
 script = ExtResource("2_wsif3")
@@ -10,38 +13,84 @@ selected_option = null
 options = Array[ExtResource("3_tuxvh")]([])
 
 [node name="ContentContainer" type="HBoxContainer" parent="PanelContainer" index="0"]
-custom_minimum_size = Vector2(1152, 0)
+custom_minimum_size = Vector2(902, 416)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -64.0
-offset_right = 64.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = -58.0
+offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.993712, 1)
 alignment = 1
 
 [node name="InformationContainer" type="VBoxContainer" parent="PanelContainer/ContentContainer" index="0"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="ItemNameLabel" type="Label" parent="PanelContainer/ContentContainer/InformationContainer" index="0"]
+[node name="TopContainer" type="HBoxContainer" parent="PanelContainer/ContentContainer/InformationContainer" index="0"]
 layout_mode = 2
-text = "Item Name"
+alignment = 1
 
-[node name="ItemStatsLabel" type="Label" parent="PanelContainer/ContentContainer/InformationContainer" index="1"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/ContentContainer/InformationContainer/TopContainer" index="0"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "Item Stats"
 
-[node name="CraftButton" type="Button" parent="PanelContainer/ContentContainer/InformationContainer" index="2"]
+[node name="StatsContainer" type="VBoxContainer" parent="PanelContainer/ContentContainer/InformationContainer/TopContainer/ScrollContainer" index="0"]
 layout_mode = 2
-text = "craft!!!"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/ContentContainer/InformationContainer/TopContainer" index="1"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/ContentContainer/InformationContainer/TopContainer/VBoxContainer" index="0"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_w61aj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CraftButton" type="Button" parent="PanelContainer/ContentContainer/InformationContainer/TopContainer/VBoxContainer" index="1"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+icon = ExtResource("5_ykn7l")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/ContentContainer/InformationContainer" index="1"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("6_sinqk")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+
+[node name="MaterialsScroll" type="ScrollContainer" parent="PanelContainer/ContentContainer/InformationContainer/NinePatchRect" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = 24.0
+offset_right = -16.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="MaterialsContainer" type="VBoxContainer" parent="PanelContainer/ContentContainer/InformationContainer/NinePatchRect/MaterialsScroll" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="OptionsGridContainer" type="GridContainer" parent="PanelContainer/ContentContainer" index="1"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 columns = 3
 
-[connection signal="pressed" from="PanelContainer/ContentContainer/InformationContainer/CraftButton" to="." method="_on_craft_button_pressed"]
+[connection signal="pressed" from="PanelContainer/ContentContainer/InformationContainer/TopContainer/VBoxContainer/CraftButton" to="." method="_on_craft_button_pressed"]

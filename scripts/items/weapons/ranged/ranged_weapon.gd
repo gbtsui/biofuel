@@ -40,8 +40,8 @@ func attack() -> void:
 	animation_player.play("attack")
 	var bullet_instance = bullet.instantiate()
 	bullet_instance.global_transform = $Pivot/Marker2D.global_transform
-	bullet_instance.damage = data.damage
+	bullet_instance.damage = data.damage * XPModifier.get_scalar("damage", data.xp.damage_xp)
 	bullet_instance.bullet_effect = data.elemental_damage_type
-	bullet_instance.bullet_effect_damage = data.elemental_damage
-	bullet_instance.bullet_effect_duration = data.elemental_damage_duration
+	bullet_instance.bullet_effect_damage = data.elemental_damage * XPModifier.get_scalar("elemental_damage", data.xp.elemental_damage_xp)
+	bullet_instance.bullet_effect_duration = data.elemental_damage_duration * XPModifier.get_scalar("elemental_damage", data.xp.elemental_damage_duration_xp)
 	get_tree().get_root().add_child(bullet_instance)

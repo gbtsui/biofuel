@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://d1d74jlq0w8dc" path="res://scenes/items/weapons/weapon.tscn" id="1_5pk2u"]
 [ext_resource type="Script" path="res://scripts/items/weapons/melee/melee_weapon.gd" id="2_h7aap"]
 [ext_resource type="Material" uid="uid://cku2oytny1tp1" path="res://shaders/outliner.tres" id="2_j5iwr"]
-[ext_resource type="Texture2D" uid="uid://r4d6vww4n6u6" path="res://icon.svg" id="3_ws25e"]
+[ext_resource type="Texture2D" uid="uid://dy5r0bxolt2vo" path="res://icon.svg" id="3_ws25e"]
 
 [node name="MeleeWeapon" instance=ExtResource("1_5pk2u")]
 material = ExtResource("2_j5iwr")
