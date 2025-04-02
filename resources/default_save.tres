@@ -1,0 +1,185 @@
+[gd_resource type="Resource" script_class="SaveGame" load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://scripts/helper/save_this_wrld/enemy_data.gd" id="1_seo8v"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/blank_aphid.tscn" id="2_ea4vg"]
+[ext_resource type="Script" path="res://scripts/helper/save_this_wrld/item_data.gd" id="2_on053"]
+[ext_resource type="Script" path="res://scripts/helper/save_this_wrld/player_stats.gd" id="3_pjoil"]
+[ext_resource type="Script" path="res://scenes/home/tilled_dirt_data.gd" id="4_wfm64"]
+[ext_resource type="Script" path="res://scripts/helper/save_this_wrld/melee_weapon_data.gd" id="4_xrmf0"]
+[ext_resource type="Script" path="res://scripts/helper/save_this_wrld/seed_data.gd" id="5_1ct8r"]
+[ext_resource type="Script" path="res://scripts/helper/save_this_wrld/save_game.gd" id="5_x4kb3"]
+[ext_resource type="Script" path="res://scripts/helper/save_this_wrld/world_data.gd" id="6_3gm0x"]
+
+[sub_resource type="Resource" id="Resource_muglc"]
+script = ExtResource("1_seo8v")
+enemy_scene_path = "res://scenes/enemies/blank_aphid.tscn"
+enemy_scene = ExtResource("2_ea4vg")
+enemy_global_position = Vector2(-5233.17, -3199.34)
+enemy_type = 0
+hp = 50.0
+max_hp = 50.0
+baseSpeed = 200.0
+currentSpeed = 200.0
+weight = 1.0
+player_target_weight = 0.5
+plot_target_weight = 1.0
+attack_damage = 5.0
+plot_attack_damage = 10.0
+drops = {
+"seeds": {
+"beetroot": {
+"chance": 0.1,
+"max": 2,
+"min": 1
+},
+"carrot": {
+"chance": 0.1,
+"max": 2,
+"min": 1
+},
+"leek": {
+"chance": 0.1,
+"max": 2,
+"min": 1
+},
+"potato": {
+"chance": 0.2,
+"max": 2,
+"min": 1
+},
+"sugarcane": {
+"chance": 0.02,
+"max": 2,
+"min": 1
+}
+}
+}
+
+[sub_resource type="Resource" id="Resource_xvd7p"]
+script = ExtResource("4_xrmf0")
+xp = {
+"attack_speed_xp": 0,
+"damage_xp": 0,
+"elemental_damage_duration_xp": 0,
+"elemental_damage_xp": 0,
+"knockback_magnitude_xp": 0
+}
+weapon_scene_path = "res://scenes/items/weapons/melee/scythe.tscn"
+damage = 5.0
+attack_speed = 1.5
+knockback_magnitude = 300.0
+elemental_damage_type = 0
+elemental_damage = 0.0
+elemental_damage_duration = 1.0
+mode = 0
+rotatable = true
+offset = 50.0
+item_name = "scythe"
+amount_in_stack = 1
+stackable = false
+item_texture_path = "res://assets/sprites/weapons/scythe.png"
+xp_upgrade_values = {}
+item_global_position = Vector2(-493, -131)
+item_type = 0
+
+[sub_resource type="Resource" id="Resource_lpt14"]
+script = ExtResource("4_xrmf0")
+xp = {
+"attack_speed_xp": 0,
+"damage_xp": 0,
+"elemental_damage_duration_xp": 0,
+"elemental_damage_xp": 0,
+"knockback_magnitude_xp": 0
+}
+weapon_scene_path = "res://scenes/items/weapons/melee/messer.tscn"
+damage = 20.0
+attack_speed = 0.5
+knockback_magnitude = 300.0
+elemental_damage_type = 0
+elemental_damage = 0.0
+elemental_damage_duration = 0.0
+mode = 0
+rotatable = true
+offset = 0.0
+item_name = "messer"
+amount_in_stack = 1
+stackable = false
+item_texture_path = "res://assets/sprites/weapons/messer.png"
+xp_upgrade_values = {}
+item_global_position = Vector2(-807, 216)
+item_type = 0
+
+[sub_resource type="Resource" id="Resource_xxtdl"]
+script = ExtResource("5_1ct8r")
+deceleration = 300.0
+initial_speed = 500.0
+growth_time = 200.0
+crop_name = "potato"
+yield_min = 4
+yield_max = 7
+seed_drop_chance = 0.9
+seed_drop_min = 0
+seed_drop_max = 2
+seed_texture_path = ""
+seed_hp = 50.0
+seed_mode = 0
+mode = 0
+rotatable = true
+offset = 50.0
+item_name = "potato_seed"
+amount_in_stack = 15
+stackable = true
+item_texture_path = "res://assets/sprites/unsorted/seed_packet.png"
+xp_upgrade_values = {}
+item_global_position = Vector2(-426, 337)
+item_type = 2
+
+[sub_resource type="Resource" id="Resource_bamff"]
+script = ExtResource("4_xrmf0")
+xp = {
+"attack_speed_xp": 0,
+"damage_xp": 0,
+"elemental_damage_duration_xp": 0,
+"elemental_damage_xp": 0,
+"knockback_magnitude_xp": 0
+}
+weapon_scene_path = "res://scenes/items/weapons/melee/hoe.tscn"
+damage = 20.0
+attack_speed = 1.0
+knockback_magnitude = 150.0
+elemental_damage_type = 0
+elemental_damage = 0.0
+elemental_damage_duration = 0.0
+mode = 0
+rotatable = true
+offset = 50.0
+item_name = "hoe"
+amount_in_stack = 1
+stackable = false
+item_texture_path = "res://assets/sprites/weapons/hoe.png"
+xp_upgrade_values = {}
+item_global_position = Vector2(-379, 178)
+item_type = 0
+
+[sub_resource type="Resource" id="Resource_g6cqe"]
+script = ExtResource("3_pjoil")
+SPEED = 300.0
+max_hp = 100.0
+hp = 100.0
+global_position = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_45rtc"]
+script = ExtResource("6_3gm0x")
+seconds_elapsed = 0.0
+current_day = 0.0
+spawn_queue = []
+
+[resource]
+script = ExtResource("5_x4kb3")
+version = "alpha-v0.0.1"
+player_stats = SubResource("Resource_g6cqe")
+plots = Array[ExtResource("4_wfm64")]([])
+items = Array[ExtResource("2_on053")]([SubResource("Resource_xvd7p"), SubResource("Resource_lpt14"), SubResource("Resource_xxtdl"), SubResource("Resource_bamff")])
+inventory = Array[ExtResource("2_on053")]([])
+enemies = Array[ExtResource("1_seo8v")]([SubResource("Resource_muglc"), SubResource("Resource_muglc"), SubResource("Resource_muglc"), SubResource("Resource_muglc"), SubResource("Resource_muglc")])
+world_state = SubResource("Resource_45rtc")

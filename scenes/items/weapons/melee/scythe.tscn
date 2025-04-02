@@ -123,6 +123,9 @@ size = Vector2(117.738, 87.1675)
 script = ExtResource("2_cxitw")
 data = SubResource("Resource_xvd7p")
 
+[node name="ItemSprite" parent="." index="1"]
+texture = ExtResource("3_iv3r8")
+
 [node name="AnimationPlayer" parent="." index="2"]
 libraries = {
 "": SubResource("AnimationLibrary_dltl0")

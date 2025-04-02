@@ -3,6 +3,7 @@ class_name SaveGame
 
 const SAVE_PATH = "user://save.tres"
 
+@export var version: String = "alpha-v0.0.1"
 @export var player_stats: PlayerStats
 @export var plots: Array[TilledDirtData]
 @export var items: Array[ItemData]
@@ -13,6 +14,10 @@ const SAVE_PATH = "user://save.tres"
 func write_savegame() -> void:
 	print("Saving game...")
 	ResourceSaver.save(self, SAVE_PATH)
+
+static func load_default_save() -> Resource:
+	print("Loading Default Save...")
+	return ResourceLoader.load("res://resources/default_save.tres")
 
 static func save_exists() -> bool:
 	return ResourceLoader.exists(SAVE_PATH)

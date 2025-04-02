@@ -19,12 +19,14 @@ func _process(delta):
 func _create_or_load_save():
 	if SaveGame.save_exists():
 		_save = SaveGame.load_savegame() as SaveGame
+		
 	else:
 		print("save doesn't exist!")
-		_save = SaveGame.new()
-		_save.player_stats = PlayerStats.new()
-		_save.world_state = WorldData.new()
-		_save.write_savegame()
+		_save = SaveGame.load_default_save() as SaveGame
+		#_save = SaveGame.new()
+		#_save.player_stats = PlayerStats.new()
+		#_save.world_state = WorldData.new()
+		#_save.write_savegame()
 	
 	player.global_position = _save.player_stats.global_position
 	player.stats = _save.player_stats

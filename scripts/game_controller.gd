@@ -79,7 +79,8 @@ func _ready():
 	print(spawn_locations)
 
 func quit_game():
-	get_tree().quit()
+	#get_tree().quit()
+	get_tree().change_scene_to_file("res://scenes/ui/title_screen.tscn")
 	# add more stuff later here ig
 
 func end_game():

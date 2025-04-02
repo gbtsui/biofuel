@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://dg7gln531a4yo"]
+[gd_scene load_steps=17 format=4 uid="uid://dg7gln531a4yo"]
 
 [ext_resource type="Script" path="res://scripts/helper/world.gd" id="1_1dtt6"]
 [ext_resource type="PackedScene" uid="uid://b1f0yvqffglf3" path="res://scenes/player.tscn" id="1_v2x1v"]
@@ -7,15 +7,8 @@
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="5_117gj"]
 [ext_resource type="PackedScene" uid="uid://cunjitgu5n442" path="res://scenes/home/interactables/crafting_bench.tscn" id="8_en705"]
 [ext_resource type="PackedScene" uid="uid://eg8tbf8uata6" path="res://scenes/enemies/spawn_point.tscn" id="9_tflit"]
-[ext_resource type="PackedScene" uid="uid://bvcgjhxm7wv5f" path="res://scenes/items/weapons/melee/hoe.tscn" id="10_uroo0"]
-[ext_resource type="PackedScene" uid="uid://bjh68np1jmvpo" path="res://scenes/items/seeds/seed.tscn" id="11_7qphp"]
-[ext_resource type="Script" path="res://scripts/helper/save_this_wrld/seed_data.gd" id="12_380nc"]
 [ext_resource type="Script" path="res://scripts/helper/target_controller.gd" id="12_iu1hs"]
 [ext_resource type="PackedScene" uid="uid://ckmvmup0ryy8p" path="res://scenes/home/interactables/upgrade_station.tscn" id="12_qxhn3"]
-[ext_resource type="PackedScene" uid="uid://e7b0co5hygvv" path="res://scenes/items/weapons/melee/scythe.tscn" id="13_qtvjl"]
-[ext_resource type="PackedScene" uid="uid://xb0r7pi6wf17" path="res://scenes/enemies/blank_ant.tscn" id="14_ecg6u"]
-[ext_resource type="PackedScene" uid="uid://cnvnjn56yn2aw" path="res://scenes/items/weapons/melee/messer.tscn" id="15_q5u5c"]
-[ext_resource type="PackedScene" uid="uid://d0wk30mn31cqm" path="res://scenes/items/weapons/melee/leek_sabre.tscn" id="16_ngk30"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q1w2m"]
 texture = ExtResource("2_a58vc")
@@ -73,31 +66,6 @@ normal = Vector2(-0.999873, 0.015942)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hcfnj"]
 normal = Vector2(0, 1)
 
-[sub_resource type="Resource" id="Resource_cdyug"]
-script = ExtResource("12_380nc")
-deceleration = 300.0
-initial_speed = 500.0
-growth_time = 5.0
-crop_name = "potato"
-yield_min = 3
-yield_max = 7
-seed_drop_chance = 0.9
-seed_drop_min = 0
-seed_drop_max = 2
-seed_texture_path = ""
-seed_hp = 50.0
-seed_mode = 0
-mode = 0
-rotatable = true
-offset = 50.0
-item_name = "potato_seed"
-amount_in_stack = 20
-stackable = true
-item_texture_path = "res://assets/sprites/unsorted/seed_packet.png"
-xp_upgrade_values = {}
-item_global_position = Vector2(0, 0)
-item_type = 0
-
 [node name="World" type="Node2D"]
 scale = Vector2(1.02042, 1)
 script = ExtResource("1_1dtt6")
@@ -115,7 +83,6 @@ script = ExtResource("12_iu1hs")
 
 [node name="Interactable3" parent="." instance=ExtResource("8_en705")]
 position = Vector2(584, 383)
-collision_layer = 1
 
 [node name="Interactable" parent="." instance=ExtResource("12_qxhn3")]
 position = Vector2(390.035, -225)
@@ -154,22 +121,3 @@ position = Vector2(-5624.16, -3621)
 
 [node name="SpawnPoint4" parent="." instance=ExtResource("9_tflit")]
 position = Vector2(7498.87, -3642)
-
-[node name="Seed" parent="." instance=ExtResource("11_7qphp")]
-position = Vector2(-259.697, 294)
-data = SubResource("Resource_cdyug")
-
-[node name="Hoe" parent="." instance=ExtResource("10_uroo0")]
-position = Vector2(-339.076, 33)
-
-[node name="Scythe" parent="." instance=ExtResource("13_qtvjl")]
-position = Vector2(-684.032, 112)
-
-[node name="Enemy" parent="." instance=ExtResource("14_ecg6u")]
-position = Vector2(-372.396, 529)
-
-[node name="MeleeWeapon" parent="." instance=ExtResource("15_q5u5c")]
-position = Vector2(-43.1195, 328)
-
-[node name="LeekSabre" parent="." instance=ExtResource("16_ngk30")]
-position = Vector2(191.098, 250)

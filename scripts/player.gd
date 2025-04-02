@@ -32,6 +32,7 @@ var current_ui: InteractableUi
 
 func _ready() -> void:
 	print(ItemRecipeDatabase.get_item_recipes())
+	player_mode = PLAYER_MODE.IN_UI
 
 func open_ui(ui_screen: Control):
 	$UiLayer.add_child(ui_screen)
